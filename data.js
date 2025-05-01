@@ -1,0 +1,242 @@
+// data.js
+const wallpapersData = [
+  {
+    id: 34,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/XyGM44r/Creeper-For-Autumn-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/XyGM44r/Creeper-For-Autumn-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/2djck1dl1jsxbwy/MineWallpapers-Creeper-For-Autumn.zip/file"
+  },
+  {
+    id: 33,
+    author: "Wither_Lord",
+    image_thumb: "https://i.ibb.co/2hzzQ6c/End-Gateway-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/2hzzQ6c/End-Gateway-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/2cb6gd25vwlrmzv/MineWallpapers-End-Gateway-by-Wither_Lord.zip/file"
+  },
+  {
+    id: 32,
+    author: "Wither_Lord",
+    image_thumb: "https://i.ibb.co/dQ959Pb/Campfire-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/dQ959Pb/Campfire-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/m09kupx5sdalb6h/MineWallpaper-Campfire-by-Wither_Lord.zip/file"
+  },
+  {
+    id: 31,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/JKQNJC7/Old-view-from-the-beach-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/JKQNJC7/Old-view-from-the-beach-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/7382acodso86lmt/MineWallpaper-Old-view-from-the-beach.zip/file"
+  },
+  {
+    id: 30,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/HHBCNRr/Lataj-cy-L-d-Realism-Craft-Realistic-Biomes-1920-1080_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/HHBCNRr/Lataj-cy-L-d-Realism-Craft-Realistic-Biomes-1920-1080.jpg",
+    download_page_url: "https://www.mediafire.com/file/jijxq7ilg7j18xe/MineWallpapers-Lataj%25C4%2585cy-L%25C4%2585d-Realism-Craft-%2526Realistic-Biomes-By-Bluzers.zip/file"
+  },
+  {
+    id: 29,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/Wpr5vBN/Rzeka-w-lesie-Realism-Carft-Realistic-Biomes-1920x1080_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/Wpr5vBN/Rzeka-w-lesie-Realism-Carft-Realistic-Biomes-1920x1080.jpg",
+    download_page_url: "https://www.mediafire.com/file/hr4zkhev34lidm1/MineWallpapers-Rzeka-w-lesie-Realism-Carft-%2526-Realistic_Biomes-by-Bluzers.zip/file"
+  },
+  {
+    id: 28,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/87T5jPT/Le-na-Panorama-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/87T5jPT/Le-na-Panorama-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/bmpisbso9czoerx/MineWallpaper-Le%25C5%259Bna-Panorama.zip/file"
+  },
+  {
+    id: 27,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/808w0Sq/Blady-las-Shaders-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/808w0Sq/Blady-las-Shaders-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/pojlfpebng00q2y/MineWallpapers-Blady-las-Shaders.zip/file"
+  },
+  {
+    id: 26,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/4dWgjWN/Blady-las-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/4dWgjWN/Blady-las-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/01e1ldcm0rq9vnl/MineWallpapers-Blady-las.zip/file"
+  },
+  {
+    id: 25,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/b7K6HYz/Pomieszczenie-Pr-by-By-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/b7K6HYz/Pomieszczenie-Pr-by-By-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/brlod6ufvl1k3d5/MineWallpapers-Pomieszczenie-pr%25C3%25B3by-by-Bluzers.zip/file"
+  },
+  {
+    id: 24,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/SrxD673/Zmrok-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/SrxD673/Zmrok-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/h73s4chwb9crswg/MineWallpapers-Zmrok-by-Bluzers.zip/file"
+  },
+  {
+    id: 23,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/FswvXKx/netherowy-zamek-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/FswvXKx/netherowy-zamek-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/pxhqhqcyptaocww/MineWallpapers-Netherowy-Zamek.zip/file"
+  },
+  {
+    id: 22,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/278kYMP/Azaliowa-ciana-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/278kYMP/Azaliowa-ciana-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/tixeep3orpbg83t/MineWallpapers-Azaliowa-%25C5%259Aciana.zip/file"
+  },
+  {
+    id: 21,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/yN1WFCp/Wielb-d-i-Sniffer-Na-Tle-Zachodu-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/yN1WFCp/Wielb-d-i-Sniffer-Na-Tle-Zachodu-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/e6qp7pkin355mm1/MineWallpaper-Wielb%25C5%2582%25C4%2585d-i-Sniffer-na-tle-zachodu.zip/file"
+  },
+  {
+    id: 20,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/1sQJ3Bm/Steave-Trzyma-Kamere-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/1sQJ3Bm/Steave-Trzyma-Kamere-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/qg3tc0azwow8p6v/MineWallpapers-Steave-Trzyma-Kamer%25C4%2599-by-bluzers.zip/file"
+  },
+  {
+    id: 19,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/VWw2yyH/Nostalgia-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/VWw2yyH/Nostalgia-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/e504wg81ysbi33a/MineWallpapers-Nostalgia-by-Bluzers.zip/file"
+  },
+  {
+    id: 18,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/0tBkZhY/Miasto-Ko-ca-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/0tBkZhY/Miasto-Ko-ca-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/jeno9zna8z61gjm/MineWallpapers-Miasto-Ko%25C5%2584ca.zip/file"
+  },
+  {
+    id: 17,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/dQBXs31/Biblioteka-Shaders-Bare-Bones-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/dQBXs31/Biblioteka-Shaders-Bare-Bones-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/5o3likj30ydnr96/MineWallpapers-Biblioteka-Shaders%252BBareBones.zip/file"
+  },
+  {
+    id: 16,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/rdqjXqs/Biblioteka-Shaders-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/rdqjXqs/Biblioteka-Shaders-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/jct0hrnirtq6zzv/MineWallpapers-Biblioteka-Shaders.zip/file"
+  },
+  {
+    id: 15,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/CMBzt4V/Biblioteka-Vanilla-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/CMBzt4V/Biblioteka-Vanilla-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/a0tehi3870s01k5/MineWallpapers-Biblioteka-Vanilla.zip/file"
+  },
+  {
+    id: 14,
+    author: "ADIXPlay",
+    image_thumb: "https://i.ibb.co/VCkKfzG/rodek-Piramidy-by-ADIXPlay-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/VCkKfzG/rodek-Piramidy-by-ADIXPlay-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/95q89v5s0k8frrm/MineWallpapers-%25C5%259Arodek-Piramidy-by-ADIXPlay.zip/file"
+  },
+  {
+    id: 13,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/BZftvgz/PRIZMA-RTX-LAS-PRZY-RZECE-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/BZftvgz/PRIZMA-RTX-LAS-PRZY-RZECE-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/lg253l708nfuld9/MineWallpapers-PRIZMA-RTX-Las-przy-rzece.zip/file"
+  },
+  {
+    id: 12,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/xqjhPxz/Deszcz-TNT-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/xqjhPxz/Deszcz-TNT-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/sryn4khva19gt2a/Deszcz-TNT-by-Bluzers.zip/file"
+  },
+  {
+    id: 11,
+    author: "ADIXPlay",
+    image_thumb: "https://i.ibb.co/9m06yN0/Czy-To-Portal-by-ADIXPlay-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/9m06yN0/Czy-To-Portal-by-ADIXPlay-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/inydrsovxnasovj/MineWallpapers-Czy-To-Portal-by-ADIXPlay.zip/file"
+  },
+  {
+    id: 10,
+    author: "ADIXPlay",
+    image_thumb: "https://i.ibb.co/bXL4PYd/Brzozowy-Las-by-ADIXPlay-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/bXL4PYd/Brzozowy-Las-by-ADIXPlay-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/u8gtfvner92nt75/MineWallpapers-Brzozowy-Las-by-ADIXPlay.zip/file"
+  },
+  {
+    id: 9,
+    author: "ADIXPlay",
+    image_thumb: "https://i.ibb.co/z5qkcw1/Netherowy-Basen-by-ADIXPlay-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/z5qkcw1/Netherowy-Basen-by-ADIXPlay-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/hxlrlae09j1gb7n/MineWallpapers-Netherowy-Basen-by-ADIXPlay.zip/file"
+  },
+  {
+    id: 8,
+    author: "ADIXPlay",
+    image_thumb: "https://i.ibb.co/JdGtdcL/nie-yca-Na-G-rze-by-ADIXPlay-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/JdGtdcL/nie-yca-Na-G-rze-by-ADIXPlay-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/j1vlalr5kg8m0ht/MineWallpapers-%25C5%259Anie%25C5%25BCyca-Na-G%25C3%25B3rze-by-ADIXPlay.zip/file"
+  },
+  {
+    id: 7,
+    author: "ADIXPlay",
+    image_thumb: "https://i.ibb.co/f2t9hFy/Wysokie-Klify-by-ADIXplay-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/f2t9hFy/Wysokie-Klify-by-ADIXplay-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/bwjsescubpeqvx1/MineWallpapers-Wysokie-Klify-by-ADIXPlay.zip/file"
+  },
+  {
+    id: 6,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/MZRqHFc/Tricky-Trials-Shaders-Bare-Bones-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/MZRqHFc/Tricky-Trials-Shaders-Bare-Bones-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/ozqclcu3k4xs4ri/MineWallpapers-Tricky-Trials-Shaders%252BBareBones.zip/file"
+  },
+  {
+    id: 5,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/Rz37h2W/Tricky-Trials-Shaders-1920x1080.png",
+    image_full: "https://i.ibb.co/Rz37h2W/Tricky-Trials-Shaders-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/hn375grarmf0nq3/MineWallpapers-Tricky-Trials-Shaders.zip/file" // <--- EXAMPLE URL - ADD YOURS!
+  },
+  {
+    id: 4,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/t3jM7zk/Tricky-Trials-Vanilla-1920x1080.png",
+    image_full: "https://i.ibb.co/t3jM7zk/Tricky-Trials-Vanilla-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/ss62zmjnhg5ly5c/MineWallpapers-Tricky-Trials-Vanilla.zip/file" // <--- EXAMPLE URL - ADD YOURS!
+  },
+  {
+    id: 3,
+    author: "MineWallpapers", // Unknown
+    image_thumb: "https://i.ibb.co/jkX29dX/Wysokie-G-ry-Shaders-Bare-Bones-1920x1080.png",
+    image_full: "https://i.ibb.co/jkX29dX/Wysokie-G-ry-Shaders-Bare-Bones-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/09acd68fnqpujtg/MineWallpapers-Wysokie-G%25C3%25B3ry-Shaders%252BBareBones.zip/file" // <--- EXAMPLE URL - ADD YOURS!
+  },
+  {
+    id: 2,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/NTr49bs/Wysokie-G-ry-Shaders-1920x1080.png",
+    image_full: "https://i.ibb.co/NTr49bs/Wysokie-G-ry-Shaders-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/ge0qtvqed4h4lgz/MineWallpapers-Wysokie-G%25C3%25B3ry-Shaders.zip/file" // <--- EXAMPLE URL - ADD YOURS!
+  },
+   {
+    id: 1,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/JQmxWMW/Wysokie-G-ry-Vanilla-1920x1080.png",
+    image_full: "https://i.ibb.co/JQmxWMW/Wysokie-G-ry-Vanilla-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/9hpagz53wuhdo1s/MineWallpapers-Wysokie-G%25C3%25B3ry-Vanilla.zip/file" // <--- EXAMPLE URL - ADD YOURS!
+  },
+  // --- ADD MORE WALLPAPERS WITH THEIR download_page_url ---
+];

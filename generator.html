@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Kodu Tapet - MineWallpapers</title>
+    <link rel="stylesheet" href="generator.style.css">
+    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
+</head>
+<body>
+    <div class="container">
+        <h1>Generator Kodu dla Nowej Tapety</h1>
+        <p>Wypełnij poniższe pola, aby wygenerować kod do wklejenia w plikach projektu MineWallpapers.</p>
+
+        <form id="wallpaper-generator-form">
+            <div class="form-group">
+                <label for="wallpaper-id">Następne ID Tapety:</label>
+                <input type="number" id="wallpaper-id" name="wallpaper-id" required min="1">
+                <small>To ID zostanie automatycznie zwiększone po każdym generowaniu.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="title-pl">Nazwa Tapety (PL):</label>
+                <input type="text" id="title-pl" name="title-pl" required>
+            </div>
+
+            <div class="form-group">
+                <label for="title-en">Nazwa Tapety (EN):</label>
+                <input type="text" id="title-en" name="title-en" required>
+            </div>
+
+            <div class="form-group">
+                <label for="author">Autor:</label>
+                <input type="text" id="author" name="author" required>
+            </div>
+
+            <!-- NOWE: Pole na URL obrazu -->
+            <div class="form-group">
+                <label for="image-url">URL Obrazu (pełny rozmiar):</label>
+                <input type="url" id="image-url" name="image-url" required placeholder="np. images/wallpapers/nazwa_pliku.jpg">
+                <small>Podaj ścieżkę do pełnego obrazu. Miniaturka zostanie wygenerowana (jeśli to możliwe) lub użyjemy tej samej ścieżki.</small>
+            </div>
+            <!-- Koniec NOWEGO pola -->
+
+            <!-- NOWE: Pole na URL strony pobierania -->
+             <div class="form-group">
+                <label for="download-page-url">URL Strony Pobierania:</label>
+                <input type="url" id="download-page-url" name="download-page-url" required placeholder="np. https://twoja_strona.pl/download/nazwa-tapety">
+            </div>
+            <!-- Koniec NOWEGO pola -->
+
+            <div class="form-group">
+                <label for="description-pl">Opis Tapety (PL) (Opcjonalne):</label>
+                <textarea id="description-pl" name="description-pl" rows="3"></textarea>
+            </div>
+
+             <div class="form-group">
+                <label for="description-en">Opis Tapety (EN) (Opcjonalne):</label>
+                <textarea id="description-en" name="description-en" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="category-key">Kategoria:</label>
+                <select id="category-key" name="category-key" required>
+                    <option value="" disabled selected>-- Wybierz kategorię --</option>
+                    <!-- Opcje kategorii zostaną dodane przez JS -->
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" id="generate-btn">Generuj Kod</button>
+                <button type="button" id="clear-btn">Wyczyść Formularz (bez ID)</button>
+            </div>
+        </form>
+
+        <div id="output-area" style="display: none;">
+            <h2>Wygenerowany Kod</h2>
+
+            <div class="code-block">
+                <h3>1. Wklej do `data.js` (wewnątrz tablicy `wallpapersData`):</h3>
+                <pre><code id="code-data"></code></pre>
+                <button type="button" class="copy-btn" data-target="code-data">Kopiuj</button>
+                <!-- Usunięto notkę o placeholderach, bo URL-e są teraz w formularzu -->
+            </div>
+
+            <div class="code-block">
+                <h3>2. Wklej do `translations.js` (wewnątrz obiektu `pl` w `wallpaperContentTranslations`):</h3>
+                <pre><code id="code-translations-pl"></code></pre>
+                <button type="button" class="copy-btn" data-target="code-translations-pl">Kopiuj</button>
+            </div>
+
+             <div class="code-block">
+                <h3>3. Wklej do `translations.js` (wewnątrz obiektu `en` w `wallpaperContentTranslations`):</h3>
+                <pre><code id="code-translations-en"></code></pre>
+                <button type="button" class="copy-btn" data-target="code-translations-en">Kopiuj</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="generator.script.js"></script>
+</body>
+</html>
