@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
+    // --- DOM Elements ---
     const wallpaperGrid = document.getElementById('wallpaper-grid');
     const categorySelect = document.getElementById('category-select');
     const searchInput = document.getElementById('search-input');
@@ -10,105 +10,104 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentYearSpan = document.getElementById('current-year');
     const themeToggleButton = document.getElementById('theme-toggle-btn');
     const banner = document.getElementById('banner-slideshow');
+    const logoLink = document.getElementById('logo-link');
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    const loadingScreen = document.getElementById('loading-screen');
 
     // Modal elements
     const modal = document.getElementById('image-preview-modal');
     const modalImg = document.getElementById('preview-image');
-    const modalDownloadButton = document.getElementById('preview-download-button'); // Button for download/redirect
-    const closeModalBtn = document.querySelector('.modal .close-btn');
+    const modalDownloadButton = document.getElementById('preview-download-button');
+    const closeModalBtn = document.querySelector('#image-preview-modal .close-btn'); // More specific selector
     // Modal Detail Elements
     const modalTitle = document.getElementById('modal-wallpaper-title');
     const modalAuthor = document.getElementById('modal-wallpaper-author');
     const modalCategory = document.getElementById('modal-wallpaper-category');
     const modalDescription = document.getElementById('modal-wallpaper-description');
 
-    // State
-    let currentLanguage = localStorage.getItem('mineWallpapersLang') || 'en';
-    let currentWallpapers = []; // Filtered wallpapers
-    const themeOrder = ['system', 'light', 'dark']; // Theme toggle order
-    let bannerInterval; // Banner slideshow interval
+    // First Time Setup Modal Elements
+    const firstTimeModal = document.getElementById('first-time-modal');
+    const setupLangButtons = firstTimeModal?.querySelectorAll('.button-group button[data-lang]');
+    const setupThemeButtons = firstTimeModal?.querySelectorAll('.button-group button[data-theme]');
+    const confirmSetupBtn = document.getElementById('confirm-setup-btn');
+
+    // --- State ---
+    let currentLanguage = localStorage.getItem('mineWallpapersLang') || 'pl'; // Default to Polish if no setup
+    let allWallpapersData = []; // Holds the original data from data.js
+    let filteredWallpapers = []; // Wallpapers matching filters/search
+    let randomizableWallpaperIds = []; // IDs available for randomization
+    const themeOrder = ['system', 'light', 'dark'];
+    let bannerInterval;
     let currentBannerIndex = 0;
-    let bannerLayer1Active = true; // Tracks which banner layer pseudo-element is active
-    let currentModalWallpaperData = null; // Store data for the currently open modal wallpaper
+    let bannerLayer1Active = true;
+    let currentModalWallpaperData = null;
+    let setupLanguageChoice = currentLanguage;
+    let setupThemeChoice = localStorage.getItem('mineWallpapersTheme') || 'system';
 
     // --- Content Protection Event Listeners ---
-    // Disable right-click context menu
     document.body.oncontextmenu = (e) => { e.preventDefault(); return false; };
-
-    // Disable drag start for images specifically
     document.addEventListener('dragstart', (event) => {
-        if (event.target.tagName === 'IMG') {
-             event.preventDefault(); // Prevent dragging images
-        }
+        if (event.target.tagName === 'IMG') { event.preventDefault(); }
     });
-    // Note: Text selection is disabled via CSS (user-select: none;) on the body
 
     // --- Helper Functions ---
-
     function getInterfaceTranslation(key, lang = currentLanguage, replacements = {}) {
-        // Handle nested keys (e.g., themeToggleButton.system)
         const keys = key.split('.');
-        let text = interfaceTranslations[lang]; // Start from the language object
+        let text = interfaceTranslations[lang];
         try {
-            keys.forEach(k => { text = text[k]; }); // Traverse down the keys
-             // Check if the final value is actually found
-             if (text === undefined) {
-                 throw new Error(`Translation key not found: ${key}`);
-             }
+            keys.forEach(k => { text = text[k]; });
+            if (text === undefined) { throw new Error(`Translation key not found: ${key}`); }
         } catch (e) {
-            // console.warn(`Translation error: ${e.message}`); // Optional warning
-            text = key; // Return the original key as fallback
+            text = key; // Fallback to key
         }
-        text = text || key; // Final fallback if text becomes null/undefined during traversal
-
-        // Apply replacements
+        text = text || key; // Final fallback
         for (const placeholder in replacements) {
             text = text.replace(`{${placeholder}}`, replacements[placeholder]);
         }
         return text;
     }
 
-
     function getCategoryName(categoryKey, lang = currentLanguage) {
-         return categoryDefinitions[categoryKey]?.[lang] || categoryKey;
+        return categoryDefinitions[categoryKey]?.[lang] || categoryKey;
     }
 
     function getWallpaperTextData(wallpaperId, lang = currentLanguage) {
-         return wallpaperContentTranslations[lang]?.[wallpaperId] || {};
+        // Find wallpaper base data first to ensure ID exists
+        const baseData = allWallpapersData.find(w => w.id === wallpaperId);
+        if (!baseData) return {}; // Return empty if ID doesn't exist in base data
+
+        // Then try to get translations
+        return wallpaperContentTranslations[lang]?.[wallpaperId] || {};
     }
 
-    // Kept for potential future use or context, but not for download name now
-    function generateFilename(wallpaperBase, wallpaperText, lang) {
-        const title = (wallpaperText.title || `wallpaper_${wallpaperBase.id}`).replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        const author = (wallpaperBase.author || 'unknown').replace(/[^a-z0-9]/gi, '_').toLowerCase();
-        return `MineWallpaper_${title}_by_${author}`;
-    }
-
-     function openPreviewModal(wallpaperId) {
-        const wallpaperBase = wallpapersData.find(w => w.id === wallpaperId);
+    // Function to open the preview modal
+    function openPreviewModal(wallpaperId) {
+        console.log(`Attempting to open preview for ID: ${wallpaperId}`); // Debug log
+        const wallpaperBase = allWallpapersData.find(w => w.id === wallpaperId);
         const wallpaperText = getWallpaperTextData(wallpaperId, currentLanguage);
 
-        // Check existence of essential elements and data
-        if (!wallpaperBase || !wallpaperText.title || !modal || !modalImg || !modalDownloadButton || !modalTitle || !modalAuthor || !modalCategory || !modalDescription) {
-             console.error("Cannot open preview - missing data or modal elements.", wallpaperId);
-             return;
+        if (!wallpaperBase || !modal || !modalImg || !modalDownloadButton || !modalTitle || !modalAuthor || !modalCategory || !modalDescription) {
+            console.error("Cannot open preview - missing base data or modal elements.", { wallpaperId, wallpaperBase, modalExists: !!modal });
+            return;
         }
+         // Check if title exists, although description/category might be missing
+         if (!wallpaperText.title) {
+            console.warn(`Preview opened, but missing title translation for wallpaper ID: ${wallpaperId} in language ${currentLanguage}`);
+            // We can still show the image and author
+         }
 
-        // Store data including the download page URL
+
         currentModalWallpaperData = { base: wallpaperBase, text: wallpaperText };
-
-        // Set image
-        modalImg.src = wallpaperBase.image_full;
-        modalImg.alt = getInterfaceTranslation('previewAlt', currentLanguage, { title: wallpaperText.title });
-
-        // Populate details
-        modalTitle.textContent = wallpaperText.title;
-        modalAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}</strong> ${wallpaperBase.author || 'N/A'}`;
+        modalImg.src = ""; // Clear previous image first
+        modalImg.src = wallpaperBase.image_full; // Set new source
+        modalImg.alt = getInterfaceTranslation('previewAlt', currentLanguage, { title: wallpaperText.title || `Wallpaper ${wallpaperId}` });
+        modalTitle.textContent = wallpaperText.title || `Wallpaper ${wallpaperId}`;
+        modalAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${wallpaperBase.author || 'N/A'}`;
 
         const categoryKey = wallpaperText.category_key;
         const categoryName = categoryKey ? getCategoryName(categoryKey, currentLanguage) : '';
         if (categoryName) {
-            modalCategory.innerHTML = `<strong>${getInterfaceTranslation('categoryLabel', currentLanguage)}</strong> ${categoryName}`;
+            modalCategory.innerHTML = `<strong>${getInterfaceTranslation('categoryLabel', currentLanguage)}:</strong> ${categoryName}`;
             modalCategory.style.display = 'block';
         } else {
             modalCategory.style.display = 'none';
@@ -116,64 +115,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         modalDescription.textContent = wallpaperText.description || '';
 
-        // Display the modal
-        modal.style.display = "flex"; // Use flex for centering the inner content
-        document.body.classList.add('modal-open'); // Add class to body to disable scroll
+        modal.style.display = "flex";
+        document.body.classList.add('modal-open');
+        console.log(`Preview modal displayed for ID: ${wallpaperId}`); // Debug log
     }
 
+    // Function to close the preview modal
     function closePreviewModal() {
         if (!modal || !modalImg) return;
-        modal.style.display = "none"; // Hide the modal
-        modalImg.src = ""; // Clear image src
-
-        currentModalWallpaperData = null; // Clear stored data
-
-        // Clear modal text fields
-        if(modalTitle) modalTitle.textContent = '';
-        if(modalAuthor) modalAuthor.textContent = '';
-        if(modalCategory) { modalCategory.textContent = ''; modalCategory.style.display = 'none'; }
-        if(modalDescription) modalDescription.textContent = '';
-
-        // Re-enable button just in case (though it shouldn't be disabled now)
-        if(modalDownloadButton) modalDownloadButton.disabled = false;
-
-        document.body.classList.remove('modal-open'); // Remove class from body to re-enable scroll
+        modal.style.display = "none";
+        modalImg.src = ""; // Important to clear src
+        currentModalWallpaperData = null;
+        if (modalTitle) modalTitle.textContent = '';
+        if (modalAuthor) modalAuthor.textContent = '';
+        if (modalCategory) { modalCategory.textContent = ''; modalCategory.style.display = 'none'; }
+        if (modalDescription) modalDescription.textContent = '';
+        if (modalDownloadButton) modalDownloadButton.disabled = false;
+        document.body.classList.remove('modal-open');
+        console.log("Preview modal closed"); // Debug log
     }
 
-    // --- forceDownload function REMOVED ---
-
-
-    // --- Standard UI Update Functions ---
+    // --- UI Update Functions ---
     function updateStaticTexts(lang) {
         document.documentElement.lang = lang;
-
         document.querySelectorAll('[data-translate]').forEach(el => {
             const key = el.getAttribute('data-translate');
-            if (el.id !== 'random-wallpaper-btn') {
-                el.textContent = getInterfaceTranslation(key, lang);
-            } else {
-                el.setAttribute('aria-label', getInterfaceTranslation(key, lang));
-            }
+            el.innerHTML = getInterfaceTranslation(key, lang);
         });
         document.querySelectorAll('[data-translate-count]').forEach(el => {
             const key = el.getAttribute('data-translate-count');
-            el.textContent = getInterfaceTranslation(key, lang, { count: wallpapersData.length });
+            el.textContent = getInterfaceTranslation(key, lang, { count: allWallpapersData.length });
         });
         document.querySelectorAll('[data-translate-lang]').forEach(el => {
-             const key = el.getAttribute('data-translate-lang');
-             el.textContent = getInterfaceTranslation(key, lang);
+            const key = el.getAttribute('data-translate-lang');
+            el.textContent = getInterfaceTranslation(key, lang);
         });
         document.querySelectorAll('[data-translate-title]').forEach(el => {
             const key = el.getAttribute('data-translate-title');
             el.title = getInterfaceTranslation(key, lang);
         });
-
-        if(searchInput) searchInput.placeholder = getInterfaceTranslation('searchPlaceholder', lang);
-        if(languageBtn) languageBtn.textContent = getInterfaceTranslation('languageButton', lang);
-        // Update modal download button text
-        if(modalDownloadButton) modalDownloadButton.textContent = getInterfaceTranslation('previewDownload', lang);
+        document.querySelectorAll('[data-translate-aria]').forEach(el => {
+            const key = el.getAttribute('data-translate-aria');
+            el.setAttribute('aria-label', getInterfaceTranslation(key, lang));
+        });
+        if (randomWallpaperBtn) {
+            randomWallpaperBtn.setAttribute('aria-label', getInterfaceTranslation('randomButton', lang));
+        }
+        if (searchInput) searchInput.placeholder = getInterfaceTranslation('searchPlaceholder', lang);
+        if (languageBtn) languageBtn.textContent = getInterfaceTranslation('languageButton', lang);
+        if (modalDownloadButton) modalDownloadButton.textContent = getInterfaceTranslation('previewDownload', lang);
         if (closeModalBtn) closeModalBtn.title = getInterfaceTranslation('closePreview', lang);
-
         updateThemeButton(localStorage.getItem('mineWallpapersTheme') || 'system');
     }
 
@@ -181,21 +172,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!categorySelect) return;
         const currentCategoryValue = categorySelect.value;
         categorySelect.innerHTML = '';
+        const allOption = document.createElement('option');
+        allOption.value = 'all';
+        allOption.textContent = getCategoryName('all', lang);
+        categorySelect.appendChild(allOption);
         Object.keys(categoryDefinitions).forEach(categoryKey => {
+            if (categoryKey === 'all') return;
             const option = document.createElement('option');
             option.value = categoryKey;
             option.textContent = getCategoryName(categoryKey, lang);
             categorySelect.appendChild(option);
         });
-         if (categoryDefinitions[currentCategoryValue]) {
+        if (categoryDefinitions[currentCategoryValue] || currentCategoryValue === 'all') {
             categorySelect.value = currentCategoryValue;
-         }
+        } else {
+            categorySelect.value = 'all';
+        }
     }
 
-    // --- Display Wallpapers Function (Modified for Redirect) ---
+    // --- Display Wallpapers Function (Corrected HTML Generation) ---
     function displayWallpapers(wallpapersToDisplay) {
         if (!wallpaperGrid) return;
-        wallpaperGrid.innerHTML = '';
+        wallpaperGrid.innerHTML = ''; // Clear previous items
 
         if (wallpapersToDisplay.length === 0) {
             wallpaperGrid.innerHTML = `<p style="text-align: center; grid-column: 1 / -1;">${getInterfaceTranslation('noResults', currentLanguage)}</p>`;
@@ -203,48 +201,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const currentCategoryFilterKey = categorySelect ? categorySelect.value : 'all';
+        // Show category tag ONLY IF 'all' categories are selected in the dropdown
         const showCategoryTag = currentCategoryFilterKey === 'all';
         const fragment = document.createDocumentFragment();
 
         wallpapersToDisplay.forEach(wallpaper => {
             const textData = getWallpaperTextData(wallpaper.id, currentLanguage);
-            if (!textData.title) {
-                console.warn(`Missing translation for wallpaper ID: ${wallpaper.id} in language ${currentLanguage}`);
-                return;
-            }
-
-            const wallpaperItem = document.createElement('div');
-            wallpaperItem.classList.add('wallpaper-item');
-            wallpaperItem.dataset.id = wallpaper.id;
-
-            const title = textData.title;
+            // Require at least a title or use ID as fallback title
+            const title = textData.title || `Wallpaper ${wallpaper.id}`;
             const description = textData.description || '';
             const categoryKey = textData.category_key;
             const categoryName = categoryKey ? getCategoryName(categoryKey, currentLanguage) : '';
             const author = wallpaper.author;
+            const downloadPageUrl = wallpaper.download_page_url || '#';
+            const isNew = wallpaper.is_new || false;
 
-            // Use the download_page_url for the link's href
-            const downloadPageUrl = wallpaper.download_page_url || '#'; // Fallback to '#' if URL is missing
+            const wallpaperItem = document.createElement('div');
+            wallpaperItem.classList.add('wallpaper-item');
+            wallpaperItem.dataset.id = wallpaper.id; // Store ID for preview click
 
+            // --- Corrected Inner HTML Structure ---
             wallpaperItem.innerHTML = `
-                <div class="wallpaper-image-container">
+                <div class="wallpaper-image-container" data-wallpaper-id="${wallpaper.id}">
+                    ${isNew ? `<span class="new-tag">${getInterfaceTranslation('newTag', currentLanguage)}</span>` : ''}
                     <img src="${wallpaper.image_thumb || ''}" alt="${title}" loading="lazy" draggable="false">
                 </div>
                 <div class="wallpaper-info">
                     <h3>${title}</h3>
-                    <p class="author"><strong>${getInterfaceTranslation('authorLabel', currentLanguage)}</strong> ${author || 'N/A'}</p>
+                    <p class="author"><strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${author || 'N/A'}</p>
                     ${description ? `<p class="description">${description}</p>` : ''}
-                    ${showCategoryTag && categoryName ? `<p class="category-tag" data-category-key="${categoryKey || 'other'}"><strong>${getInterfaceTranslation('categoryLabel', currentLanguage)}</strong> ${categoryName}</p>` : ''}
+                    ${showCategoryTag && categoryName ? `<p class="category-tag" data-category-key="${categoryKey || 'other'}"><strong>${getInterfaceTranslation('categoryLabel', currentLanguage)}:</strong> ${categoryName}</p>` : ''}
                     <a href="${downloadPageUrl}" target="_blank" rel="noopener noreferrer" class="download-btn">${getInterfaceTranslation('downloadButton', currentLanguage)}</a>
                 </div>
             `;
 
-            const imgContainer = wallpaperItem.querySelector('.wallpaper-image-container');
-            if (imgContainer) {
-                imgContainer.addEventListener('click', () => {
-                    openPreviewModal(wallpaper.id);
-                });
-            }
+            // Add click listener for preview AFTER setting innerHTML
+             const imgContainer = wallpaperItem.querySelector('.wallpaper-image-container');
+             if (imgContainer) {
+                 imgContainer.addEventListener('click', (e) => {
+                     // Get the ID directly from the clicked element's dataset
+                     const clickedId = parseInt(e.currentTarget.dataset.wallpaperId, 10);
+                     if (clickedId) {
+                          console.log(`Image container clicked, ID: ${clickedId}`); // Debug log
+                          openPreviewModal(clickedId);
+                     } else {
+                          console.error("Could not get wallpaper ID from clicked element.");
+                     }
+                 });
+             }
 
             fragment.appendChild(wallpaperItem);
         });
@@ -253,29 +257,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // --- END displayWallpapers ---
 
+    // --- Filter and Search Logic ---
     function filterAndSearchWallpapers() {
         const selectedCategoryKey = categorySelect ? categorySelect.value : 'all';
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-        currentWallpapers = wallpapersData.filter(wallpaper => {
+        filteredWallpapers = allWallpapersData.filter(wallpaper => { // Filter from the full list
             const textData = getWallpaperTextData(wallpaper.id, currentLanguage);
-            if (!textData || !textData.title) return false;
+            // Basic check: wallpaper must exist in translations (at least have an entry)
+            // Allow wallpapers without full text data if ID matches, but prioritize those with data for searching
+            if (searchTerm && Object.keys(textData).length === 0) {
+                 return false; // Don't include in search results if no text data
+            }
 
             const categoryKey = textData.category_key;
             const isCategoryMatch = selectedCategoryKey === 'all' || categoryKey === selectedCategoryKey;
-            if (!isCategoryMatch) return false;
 
+            if (!isCategoryMatch) return false; // Filter by category first
+
+            // If search term exists, filter by text content
             if (searchTerm) {
                 const title = (textData.title || '').toLowerCase();
                 const author = (wallpaper.author || '').toLowerCase();
                 const description = (textData.description || '').toLowerCase();
-                return title.includes(searchTerm) || author.includes(searchTerm) || description.includes(searchTerm);
+                const categoryName = (selectedCategoryKey === 'all' && categoryKey) ? getCategoryName(categoryKey, currentLanguage).toLowerCase() : '';
+
+                return title.includes(searchTerm) ||
+                       author.includes(searchTerm) ||
+                       description.includes(searchTerm) ||
+                       (categoryName && categoryName.includes(searchTerm)) ||
+                       wallpaper.id.toString() === searchTerm; // Allow searching by ID
             }
-            return true;
+
+            return true; // Pass if category matches and no search term
         });
 
-        displayWallpapers(currentWallpapers);
+        displayWallpapers(filteredWallpapers);
+
+        // Point 9: Reset randomizable pool based on new filter results
+        randomizableWallpaperIds = filteredWallpapers.map(w => w.id);
+        console.log("Filters applied. Displaying:", filteredWallpapers.length, "wallpapers. Random pool count:", randomizableWallpaperIds.length); // Debug log
     }
+
 
     // --- Theme Logic ---
     function applyTheme(theme) {
@@ -305,6 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Banner Slideshow Logic ---
     function startBannerSlideshow() {
+        // (No changes needed here based on the issues)
         if (!banner) return;
         const imagesAttr = banner.getAttribute('data-banner-images');
         if (!imagesAttr) return;
@@ -315,23 +339,18 @@ document.addEventListener('DOMContentLoaded', () => {
             else { console.warn("Not enough banner images for slideshow (need at least 2)."); }
             return;
         }
-
-        let nextImageIndex = 1; // Start preloading the second image
+        let nextImageIndex = 1;
         let imagePreload = new Image();
-
         const preloadNextImage = () => {
             nextImageIndex = (currentBannerIndex + 1) % images.length;
             imagePreload = new Image();
-            imagePreload.onload = () => { /* Image preloaded */ };
+            imagePreload.onload = () => { /* Preloaded */ };
             imagePreload.onerror = () => { console.error("Failed to preload banner image:", images[nextImageIndex]); };
             if (images[nextImageIndex]) { imagePreload.src = images[nextImageIndex]; }
         };
-
         const changeBannerBackground = () => {
             const nextImageUrl = images[nextImageIndex];
             if (!nextImageUrl) return;
-
-            // Set preloaded image on the hidden layer and fade layers
             if (bannerLayer1Active) {
                 banner.style.setProperty('--banner-bg-layer2', `url('${nextImageUrl}')`);
                 banner.style.setProperty('--banner-opacity-layer1', '0');
@@ -341,65 +360,111 @@ document.addEventListener('DOMContentLoaded', () => {
                 banner.style.setProperty('--banner-opacity-layer1', '1');
                 banner.style.setProperty('--banner-opacity-layer2', '0');
             }
-
             bannerLayer1Active = !bannerLayer1Active;
             currentBannerIndex = nextImageIndex;
-
-            // Start preloading the *next* image after the transition starts
             preloadNextImage();
         };
-
-        // Initial setup
         banner.style.setProperty('--banner-bg-layer1', `url('${images[currentBannerIndex]}')`);
         banner.style.setProperty('--banner-opacity-layer1', '1');
         banner.style.setProperty('--banner-opacity-layer2', '0');
         bannerLayer1Active = true;
-
-        // Preload the second image immediately
         preloadNextImage();
-
-        // Clear old interval and start new one
         if (bannerInterval) clearInterval(bannerInterval);
-        bannerInterval = setInterval(changeBannerBackground, 5000); // Change every 5 seconds
+        bannerInterval = setInterval(changeBannerBackground, 5000);
     }
-    // Set initial opacity variables (needed for CSS transitions)
     banner?.style.setProperty('--banner-opacity-layer1', '1');
     banner?.style.setProperty('--banner-opacity-layer2', '0');
 
+    // --- First Time Setup Logic ---
+    function handleFirstTimeSetup() {
+        // (No changes needed here based on the issues)
+        if (!firstTimeModal || !setupLangButtons || !setupThemeButtons || !confirmSetupBtn) {
+             console.error("First time setup modal elements not found.");
+             return false;
+        }
+        const setupDone = localStorage.getItem('mineWallpapersSetupDone') === 'true';
+        if (setupDone) return false;
+
+        firstTimeModal.style.display = "flex";
+        document.body.classList.add('modal-open');
+        setupLangButtons.forEach(btn => btn.classList.toggle('selected', btn.dataset.lang === setupLanguageChoice));
+        setupThemeButtons.forEach(btn => btn.classList.toggle('selected', btn.dataset.theme === setupThemeChoice));
+        setupLangButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                setupLanguageChoice = button.dataset.lang;
+                setupLangButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+        setupThemeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                setupThemeChoice = button.dataset.theme;
+                setupThemeButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
+            });
+        });
+        confirmSetupBtn.addEventListener('click', () => {
+            currentLanguage = setupLanguageChoice;
+            localStorage.setItem('mineWallpapersLang', currentLanguage);
+            setTheme(setupThemeChoice);
+            localStorage.setItem('mineWallpapersSetupDone', 'true');
+            firstTimeModal.style.display = "none";
+            document.body.classList.remove('modal-open');
+            initializePageContent(); // Initialize *after* setup confirmation
+        });
+        return true;
+    }
 
     // --- Event Listeners ---
     categorySelect?.addEventListener('change', filterAndSearchWallpapers);
     searchInput?.addEventListener('input', filterAndSearchWallpapers);
 
-    randomWallpaperBtn?.addEventListener('click', () => {
-         const availableIds = currentWallpapers.map(w => w.id);
-        if (availableIds.length > 0) {
-            const randomIndex = Math.floor(Math.random() * availableIds.length);
-            openPreviewModal(availableIds[randomIndex]);
+    // Random Wallpaper Button Listener (Checked)
+    randomWallpaperBtn?.addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log("Random button clicked. Pool size:", randomizableWallpaperIds.length); // Debug log
+        if (randomizableWallpaperIds.length === 0) {
+            if (filteredWallpapers.length > 0) {
+                alert(getInterfaceTranslation('allWallpapersRandomized', currentLanguage));
+            } else {
+                 alert(getInterfaceTranslation('noResults', currentLanguage));
+            }
         } else {
-             const categoryKey = categorySelect ? categorySelect.value : 'all';
-             const anyInCategory = wallpapersData.some(w => { const textData = getWallpaperTextData(w.id, currentLanguage); return textData && (categoryKey === 'all' || textData.category_key === categoryKey); });
-             alert(getInterfaceTranslation(anyInCategory ? 'noResults' : 'noWallpapersInCategory', currentLanguage));
+            const randomIndex = Math.floor(Math.random() * randomizableWallpaperIds.length);
+            const wallpaperId = randomizableWallpaperIds[randomIndex];
+            console.log(`Randomizing... Chosen index: ${randomIndex}, ID: ${wallpaperId}`); // Debug log
+            openPreviewModal(wallpaperId);
+            // Remove the chosen ID from the pool for next time
+            randomizableWallpaperIds.splice(randomIndex, 1);
+            console.log(`ID ${wallpaperId} removed from pool. New pool size: ${randomizableWallpaperIds.length}`); // Debug log
         }
+        randomWallpaperBtn.blur();
     });
-    if(randomWallpaperBtn) { randomWallpaperBtn.classList.add('icon-button'); if(!randomWallpaperBtn.querySelector('i.fa-dice')) { randomWallpaperBtn.innerHTML = '<i class="fas fa-dice"></i>'; } }
+    if (randomWallpaperBtn) { randomWallpaperBtn.classList.add('icon-button'); if (!randomWallpaperBtn.querySelector('i.fa-dice')) { randomWallpaperBtn.innerHTML = '<i class="fas fa-dice"></i>'; } }
 
-    publishBtn?.addEventListener('click', () => { if (typeof publishUrl !== 'undefined' && publishUrl) { window.open(publishUrl, '_blank'); } else { console.warn("publishUrl is not defined."); } });
+    // Publish Button Listener
+    publishBtn?.addEventListener('click', () => {
+        const url = currentLanguage === 'pl'
+            ? 'https://forms.gle/bMWDted25PYNMuPT9'
+            : 'https://forms.gle/eAzL1uLp7R3zV1C88';
+        window.open(url, '_blank');
+        publishBtn.blur();
+    });
 
+    // Language Button Listener
     languageBtn?.addEventListener('click', () => {
         currentLanguage = currentLanguage === 'pl' ? 'en' : 'pl';
         localStorage.setItem('mineWallpapersLang', currentLanguage);
-        updateStaticTexts(currentLanguage);
-        populateCategories(currentLanguage);
-        filterAndSearchWallpapers();
+        updateStaticTexts(currentLanguage); // Update all text
+        populateCategories(currentLanguage); // Repopulate dropdown
+        filterAndSearchWallpapers(); // Re-filter and display using new language data
+        languageBtn.blur();
     });
 
-    // Modal listeners
+    // Modal listeners (Checked)
     closeModalBtn?.addEventListener('click', closePreviewModal);
     modal?.addEventListener('click', (event) => { if (event.target === modal) closePreviewModal(); }); // Close on backdrop click
     document.addEventListener('keydown', (event) => { if (event.key === "Escape" && modal?.style.display === "flex") closePreviewModal(); });
-
-    // Modal Download Button Listener (Redirects)
     modalDownloadButton?.addEventListener('click', () => {
         if (currentModalWallpaperData?.base?.download_page_url) {
             window.open(currentModalWallpaperData.base.download_page_url, '_blank');
@@ -407,6 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Missing download page URL for modal wallpaper.");
             alert(getInterfaceTranslation('downloadFailed', currentLanguage) || 'Download failed.');
         }
+        modalDownloadButton.blur();
     });
 
     // Theme Toggle Button Listener
@@ -415,6 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentIndex = themeOrder.indexOf(currentTheme);
         const nextTheme = themeOrder[(currentIndex + 1) % themeOrder.length];
         setTheme(nextTheme);
+        themeToggleButton.blur();
     });
 
     // System Theme Change Listener
@@ -425,21 +492,93 @@ document.addEventListener('DOMContentLoaded', () => {
         else if (mediaQuery.addListener) { mediaQuery.addListener(handleChange); }
     } catch(e) { console.warn("System theme change detection not fully supported."); }
 
+    // Logo Click Listener
+    logoLink?.addEventListener('click', (event) => {
+        event.preventDefault();
+        if(searchInput) searchInput.value = '';
+        if(categorySelect) categorySelect.value = 'all';
+        filterAndSearchWallpapers();
+        window.scrollTo({ top: 0, behavior: 'auto' });
+    });
 
-    // --- Initialization ---
-    function initialize() {
+    // Scroll To Top Button Logic
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+            scrollToTopBtn?.classList.add('visible');
+        } else {
+            scrollToTopBtn?.classList.remove('visible');
+        }
+    });
+    scrollToTopBtn?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Keep smooth scroll here
+        scrollToTopBtn.blur();
+    });
+
+
+    // --- Initialization Function for Page Content ---
+    function initializePageContent() {
+        console.log("Initializing page content...");
         if(currentYearSpan) currentYearSpan.textContent = new Date().getFullYear();
-        updateStaticTexts(currentLanguage);
-        populateCategories(currentLanguage);
+
+        // Store the full dataset only once
+         if (allWallpapersData.length === 0) {
+            allWallpapersData = [...wallpapersData]; // Copy data from data.js
+         }
+
+
+        // Set initial theme based on storage or default
         const savedTheme = localStorage.getItem('mineWallpapersTheme') || 'system';
         setTheme(savedTheme);
+
+        // Populate UI elements based on current language
+        updateStaticTexts(currentLanguage);
+        populateCategories(currentLanguage);
+
+        // Initial filter and display (populates filteredWallpapers and random pool)
         filterAndSearchWallpapers();
+
+        // Update dynamic counts etc. (using allWallpapersData for total count)
         if (wallpaperCountElement) {
-            wallpaperCountElement.textContent = getInterfaceTranslation('bannerCount', currentLanguage, { count: wallpapersData.length });
+             wallpaperCountElement.textContent = getInterfaceTranslation('bannerCount', currentLanguage, { count: allWallpapersData.length });
         }
+
+        // Start banner slideshow
         startBannerSlideshow();
+
+        // Hide loading screen AFTER content is setup
+        if (loadingScreen) {
+             setTimeout(() => {
+                 loadingScreen.style.opacity = '0';
+                 loadingScreen.addEventListener('transitionend', () => {
+                    if (loadingScreen.parentNode) {
+                         loadingScreen.parentNode.removeChild(loadingScreen);
+                     }
+                 }, { once: true });
+             }, 250);
+        }
+         console.log("Page content initialization complete.");
     }
 
-    // Run initialization
-    initialize();
-});
+    // --- Main Execution ---
+    // Check if first-time setup is needed
+    const setupHandled = handleFirstTimeSetup();
+
+    // If setup modal is NOT displayed, initialize the page immediately.
+    // Otherwise, initialization will be triggered by the setup modal's confirm button.
+    if (!setupHandled) {
+        initializePageContent();
+    } else {
+         // Hide loading screen even if setup modal is shown,
+         // as the basic structure is loaded. Content init happens later.
+          if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.addEventListener('transitionend', () => {
+                 if (loadingScreen.parentNode) {
+                     loadingScreen.parentNode.removeChild(loadingScreen);
+                 }
+             }, { once: true });
+          }
+         console.log("Waiting for first-time setup completion...");
+    }
+
+}); // End DOMContentLoaded

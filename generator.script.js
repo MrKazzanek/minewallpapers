@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const titlePlInput = document.getElementById('title-pl');
     const titleEnInput = document.getElementById('title-en');
     const authorInput = document.getElementById('author');
-    const imageUrlInput = document.getElementById('image-url'); // NOWE
-    const downloadUrlInput = document.getElementById('download-page-url'); // NOWE
+    const imageUrlInput = document.getElementById('image-url');
+    const downloadUrlInput = document.getElementById('download-page-url');
     const descPlInput = document.getElementById('description-pl');
     const descEnInput = document.getElementById('description-en');
     const categorySelect = document.getElementById('category-key');
+    const isNewCheckbox = document.getElementById('is-new-wallpaper'); // NOWE
     const clearBtn = document.getElementById('clear-btn');
     const outputArea = document.getElementById('output-area');
     const codeDataOutput = document.getElementById('code-data');
@@ -27,46 +28,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Inicjalizacja ---
 
-    // Wypełnij listę kategorii
     function populateGeneratorCategories() {
-        // Upewnij się, że element select istnieje
         if (!categorySelect) {
             console.error("Element select kategorii nie został znaleziony!");
             return;
         }
-        // Wyczyść istniejące opcje (oprócz pierwszej wyłączonej)
         while (categorySelect.options.length > 1) {
             categorySelect.remove(1);
         }
-        // Dodaj nowe opcje
         for (const key in availableCategories) {
             const option = document.createElement('option');
             option.value = key;
-            option.textContent = availableCategories[key]; // Używamy nazw zdefiniowanych tutaj
+            option.textContent = availableCategories[key];
             categorySelect.appendChild(option);
         }
     }
 
-
-    // Wczytaj i ustaw następne ID
     function loadNextId() {
-        if (!idInput) return; // Sprawdzenie
+        if (!idInput) return;
         const lastId = parseInt(localStorage.getItem(localStorageKey) || '0', 10);
         idInput.value = lastId + 1;
     }
 
-    // Zapisz następne ID
     function saveNextId(currentId) {
         localStorage.setItem(localStorageKey, currentId);
     }
 
     // --- Obsługa formularza ---
 
-    if (form) { // Sprawdź, czy formularz istnieje
+    if (form) {
         form.addEventListener('submit', (event) => {
-            event.preventDefault(); // Zapobiegaj standardowemu wysłaniu formularza
+            event.preventDefault();
 
-            // Pobierz wartości (w tym nowe pola)
+            // Pobierz wartości
             const id = idInput.value.trim();
             const titlePl = titlePlInput.value.trim();
             const titleEn = titleEnInput.value.trim();
@@ -76,8 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const descPl = descPlInput.value.trim();
             const descEn = descEnInput.value.trim();
             const categoryKey = categorySelect.value;
+            const isNew = isNewCheckbox ? isNewCheckbox.checked : true; // Odczytaj stan checkboxa (domyślnie true jeśli nie istnieje)
 
-            // Walidacja (dodano sprawdzenie URL)
+            // Walidacja
             if (!id || !titlePl || !titleEn || !author || !imageUrl || !downloadUrl || !categoryKey) {
                 alert('Proszę wypełnić wszystkie wymagane pola (ID, Nazwy, Autor, URL Obrazu, URL Pobierania, Kategoria).');
                 return;
@@ -87,31 +82,26 @@ document.addEventListener('DOMContentLoaded', () => {
                  alert('ID musi być liczbą dodatnią.');
                  return;
              }
-            // Prosta walidacja URL
             if (!isValidUrl(imageUrl) || !isValidUrl(downloadUrl)) {
                  alert('Proszę podać poprawne adresy URL dla obrazu i strony pobierania (np. https://... lub images/...).');
                  return;
             }
 
-            // Generuj kod (przekazujemy nowe wartości)
-            generateCodeSnippets(id, titlePl, titleEn, author, imageUrl, downloadUrl, descPl, descEn, categoryKey);
+            // Generuj kod (przekazujemy isNew)
+            generateCodeSnippets(id, titlePl, titleEn, author, imageUrl, downloadUrl, descPl, descEn, categoryKey, isNew);
 
-            // Zapisz i ustaw następne ID
             saveNextId(id);
             idInput.value = parsedId + 1;
 
-            // Pokaż obszar wyników
             if (outputArea) {
                  outputArea.style.display = 'block';
-                 // Przewiń do wyników
                  outputArea.scrollIntoView({ behavior: 'smooth' });
             }
         });
     }
 
-    if (clearBtn) { // Sprawdź, czy przycisk istnieje
+    if (clearBtn) {
         clearBtn.addEventListener('click', () => {
-            // Czyść wszystkie pola oprócz ID
             if (titlePlInput) titlePlInput.value = '';
             if (titleEnInput) titleEnInput.value = '';
             if (authorInput) authorInput.value = '';
@@ -119,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (downloadUrlInput) downloadUrlInput.value = '';
             if (descPlInput) descPlInput.value = '';
             if (descEnInput) descEnInput.value = '';
-            if (categorySelect) categorySelect.value = ''; // Resetuj select
-            // Ukryj wyniki
+            if (categorySelect) categorySelect.value = '';
+            if (isNewCheckbox) isNewCheckbox.checked = true; // NOWE: Resetuj checkbox do stanu checked
             if (outputArea) outputArea.style.display = 'none';
             if (codeDataOutput) codeDataOutput.textContent = '';
             if (codeTransPlOutput) codeTransPlOutput.textContent = '';
@@ -131,37 +121,35 @@ document.addEventListener('DOMContentLoaded', () => {
      // --- Prosta Walidacja URL ---
      function isValidUrl(string) {
         if (!string) return false;
-        // Akceptuj bezwzględne URL (http, https)
         if (string.startsWith('http://') || string.startsWith('https://')) {
-             try {
-               new URL(string);
-               return true;
-             } catch (_) {
-               return false;
-             }
+             try { new URL(string); return true; } catch (_) { return false; }
         }
-        // Akceptuj ścieżki względne (proste sprawdzenie - nie zaczyna się od '/', zawiera '.' i nie ma spacji)
-        // Możesz dostosować tę logikę do swoich potrzeb
-        if (!string.startsWith('/') && string.includes('.') && !/\s/.test(string)) {
-            return true;
+        // Akceptuj ścieżki które wydają się URL-ami względnymi (bardzo proste)
+        if (string.includes('/') && string.includes('.') && !/\s/.test(string) && !string.startsWith('/') && !string.startsWith('.')) {
+             // Proste heurystyczne sprawdzenie dla względnych URL obrazów np. 'images/img.png'
+             // Można to ulepszyć sprawdzając rozszerzenia itp.
+             // UWAGA: To nie jest pełna walidacja URL względnego.
+             // Jeśli zaczyna się od 'images/' jest OK
+             if(string.startsWith('images/')) return true;
+             // Akceptuje też jeśli jest tylko nazwa pliku z rozszerzeniem
+             if (!string.includes('/')) return true;
         }
-        // Dodaj tu inne warunki, jeśli potrzebujesz (np. sprawdzanie rozszerzeń)
-        return false; // Domyślnie nie jest poprawny
+        // Akceptuj URL z ibb.co
+        if (string.includes('ibb.co')) return true;
+        // Akceptuj URL z mediafire.com
+        if (string.includes('mediafire.com')) return true;
+
+        return false;
       }
 
     // --- Generowanie kodu ---
-
-    // Pomocnicza funkcja do escape'owania stringów dla kodu JS
     function escapeJsString(str) {
-        if (typeof str !== 'string') return ''; // Zwróć pusty string jeśli nie jest stringiem
-        return str.replace(/\\/g, '\\\\') // Backslashes
-                  .replace(/"/g, '\\"')  // Double quotes
-                  .replace(/'/g, "\\'")  // Single quotes
-                  .replace(/\n/g, '\\n') // Newlines
-                  .replace(/\r/g, '\\r'); // Carriage returns
+        if (typeof str !== 'string') return '';
+        return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
     }
 
-    function generateCodeSnippets(id, titlePl, titleEn, author, imageUrl, downloadUrl, descPl, descEn, categoryKey) {
+    // Dodano parametr isNew
+    function generateCodeSnippets(id, titlePl, titleEn, author, imageUrl, downloadUrl, descPl, descEn, categoryKey, isNew) {
         const safeAuthor = escapeJsString(author);
         const safeTitlePl = escapeJsString(titlePl);
         const safeTitleEn = escapeJsString(titleEn);
@@ -171,32 +159,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const safeDownloadUrl = escapeJsString(downloadUrl);
 
         // Automatyczne tworzenie nazwy miniaturki
-        let thumbnailUrl = safeImageUrl; // Domyślnie ten sam URL
+        let thumbnailUrl = safeImageUrl;
         const lastDotIndex = safeImageUrl.lastIndexOf('.');
         if (lastDotIndex > 0) {
             const nameWithoutExt = safeImageUrl.substring(0, lastDotIndex);
             const ext = safeImageUrl.substring(lastDotIndex);
-            const lastSlashIndex = nameWithoutExt.lastIndexOf('/');
-            if (lastSlashIndex !== -1) {
-                 thumbnailUrl = nameWithoutExt.substring(0, lastSlashIndex + 1) +
-                                nameWithoutExt.substring(lastSlashIndex + 1) + '_thumb' + ext;
-            } else {
-                 thumbnailUrl = nameWithoutExt + '_thumb' + ext;
+             // Proste zastąpienie '.png' -> '_thumb.png' itp. działa dla URL z ibb np.
+             thumbnailUrl = nameWithoutExt + '_thumb' + ext;
+
+            // Jeśli URL nie zawiera nazwy pliku (np. tylko domena), loguj ostrzeżenie
+             if (thumbnailUrl === safeImageUrl || !safeImageUrl.includes('/')) {
+                 console.warn("Nie udało się automatycznie wygenerować URL miniaturki, użyto pełnego URL obrazu. Edytuj ręcznie w 'data.js', jeśli potrzebujesz innej miniaturki (np. dodaj '_thumb' przed rozszerzeniem).");
+                 thumbnailUrl = safeImageUrl; // Wróć do oryginalnego URL jeśli coś poszło nie tak
             }
-        }
-        if (thumbnailUrl === safeImageUrl) {
-            console.warn("Nie udało się automatycznie wygenerować nazwy miniaturki, użyto pełnego URL obrazu. Edytuj ręcznie w 'data.js', jeśli potrzebujesz innej miniaturki.");
+        } else {
+             console.warn("Nie udało się znaleźć rozszerzenia w URL obrazu. Nie można wygenerować URL miniaturki. Użyto pełnego URL.");
         }
 
 
-        // 1. Kod dla data.js
-        const dataCode = `{
+        // 1. Kod dla data.js (zmodyfikowany)
+        let dataCode = `{
     id: ${id},
     author: "${safeAuthor}",
     image_thumb: "${thumbnailUrl}", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "${safeImageUrl}",
-    download_page_url: "${safeDownloadUrl}"
-  },`; // Przecinek na końcu
+    download_page_url: "${safeDownloadUrl}"`; // Usuwamy przecinek z tej linii
+
+        // Dodaj is_new: true jeśli checkbox jest zaznaczony
+        if (isNew) {
+            dataCode += `,
+    is_new: true`;
+        }
+
+        dataCode += `
+  },`; // Zamykający nawias i przecinek na końcu CAŁEGO obiektu
 
         // 2. Kod dla translations.js (PL)
         let transPlCode = `    ${id}: { title: "${safeTitlePl}",`;
@@ -208,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (safeDescEn) { transEnCode += ` description: "${safeDescEn}",`; }
         transEnCode += ` category_key: "${categoryKey}" },`;
 
-        // Wyświetl kod (sprawdź, czy elementy istnieją)
         if (codeDataOutput) codeDataOutput.textContent = dataCode;
         if (codeTransPlOutput) codeTransPlOutput.textContent = transPlCode;
         if (codeTransEnOutput) codeTransEnOutput.textContent = transEnCode;
@@ -219,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const targetId = button.getAttribute('data-target');
             const codeElement = document.getElementById(targetId);
-            if (codeElement && navigator.clipboard) { // Sprawdź wsparcie dla clipboard API
+            if (codeElement && navigator.clipboard) {
                 const codeToCopy = codeElement.textContent;
                 navigator.clipboard.writeText(codeToCopy).then(() => {
                     const originalText = button.textContent;
@@ -234,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Nie udało się skopiować do schowka. Spróbuj ręcznie.');
                 });
             } else if (codeElement) {
-                // Fallback dla starszych przeglądarek (mniej niezawodny)
+                // Fallback
                 try {
                     const range = document.createRange();
                     range.selectNode(codeElement);
@@ -242,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.getSelection().addRange(range);
                     document.execCommand('copy');
                     window.getSelection().removeAllRanges();
-
                     const originalText = button.textContent;
                     button.textContent = 'Skopiowano!';
                     button.classList.add('copied');
@@ -257,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
 
     // Uruchom inicjalizację
     populateGeneratorCategories();

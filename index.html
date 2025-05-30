@@ -1,41 +1,80 @@
 <!DOCTYPE html>
-<html lang="pl"> <!-- Language updated by JS -->
+<html lang="pl"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MineWallpapers - Tapety Minecraft</title>
+    <title>MineWallpapers</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="https://cdn.glitch.global/5576a764-16f0-41b3-9c61-c808edb4ba47/minecraft_title.png?v=1723223615332" type="image/x-icon"> 
-    <!-- Font Awesome for icons -->
+    <link rel="icon" href="https://cdn.glitch.global/5576a764-16f0-41b3-9c61-c808edb4ba47/minecraft_title.png?v=1723223615332" type="image/x-icon">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts (Roboto) -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<!-- Disable right-click context menu -->
+
 <body oncontextmenu="return false;">
+<div style="background-color: #2e7d32; color: #fff; padding: 1rem 2rem; text-align: center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1rem; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); border-bottom: 4px solid #1b5e20;">
+  <strong>Uwaga:</strong> Strona <strong>Minespot</strong> oraz wszystkie jej podstrony oficjalnie zostają zamknięte <strong>8 lipca</strong>.
+</div><br>
+    
+    <div id="loading-screen">
+        <img src="https://cdn.glitch.global/5576a764-16f0-41b3-9c61-c808edb4ba47/tytu%C5%82.png?v=1725023575925" alt="MineWallpapers Logo Loading">
+        <div class="loading-bar-container">
+             <div class="loading-bar"></div>
+        </div>
+        <p>Ładowanie / Loading...</p>
+    </div>
+
+   
+    <div id="first-time-modal" class="modal" style="display: none;">
+        <div class="modal-inner-content first-time-setup">
+            <h2>Witaj! / Welcome!</h2>
+            <p>Wybierz preferencje / Choose your preferences:</p>
+
+            <div class="setup-section">
+                <label>Język / Language:</label>
+                <div class="button-group">
+                    <button data-lang="pl">Polski</button>
+                    <button data-lang="en">English</button>
+                </div>
+            </div>
+
+            <div class="setup-section">
+                <label>Motyw / Theme:</label>
+                <div class="button-group">
+                    <button data-theme="system"><i class="fas fa-circle-half-stroke"></i> System</button>
+                    <button data-theme="light"><i class="fas fa-sun"></i> Jasny / Light</button>
+                    <button data-theme="dark"><i class="fas fa-moon"></i> Ciemny / Dark</button>
+                </div>
+            </div>
+
+            <button id="confirm-setup-btn">Zatwierdź / Confirm</button>
+        </div>
+    </div>
+
+
     <header>
-        <div class="logo">
-            <!-- Change src to your logo path -->
+        
+        <div class="logo" id="logo-link" style="cursor: pointer;">
             <img src="https://cdn.glitch.global/5576a764-16f0-41b3-9c61-c808edb4ba47/tytu%C5%82.png?v=1725023575925" alt="MineWallpapers Logo">
-            <!-- Alt text: <h1>MineWallpapers</h1> -->
         </div>
         <div class="search-container">
-            <input type="search" id="search-input" style="font-family: MinecraftPl; font-size: 30px;" placeholder="Szukaj tapet..."> <!-- Placeholder updated by JS -->
+            <input type="search" id="search-input" style="font-family: MinecraftPl; font-size: 30px;" placeholder="Szukaj tapet..."> 
         </div>
         <div class="controls-right">
-             <!-- Theme Toggle Button -->
-             <button id="theme-toggle-btn" class="icon-button" aria-label="Zmień motyw"> <!-- Aria-label updated by JS -->
-                 <i class="fas fa-circle-half-stroke"></i> <!-- Icon updated by JS -->
+             
+             <button id="theme-toggle-btn" class="icon-button" aria-label="Zmień motyw"> 
+                 <i class="fas fa-circle-half-stroke"></i> 
              </button>
-             <!-- Mobile menu toggle (shown via CSS) -->
+             
              <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-             <!-- Mobile menu content could be added here -->
+             
         </div>
     </header>
 
-    <!-- Banner with image URLs for slideshow -->
+    
     <section class="banner" id="banner-slideshow"
              data-banner-images='[
                  "https://i.ibb.co/dQBXs31/Biblioteka-Shaders-Bare-Bones-1920x1080.png",
@@ -44,12 +83,14 @@
                  "https://i.ibb.co/87T5jPT/Le-na-Panorama-1920x1080.png",
                  "https://i.ibb.co/dQ959Pb/Campfire-1920x1080.png"
              ]'>
-        <!-- Separate overlay element -->
+        
         <div class="banner-overlay"></div>
-        <!-- Banner content (over the blurred background) -->
+        
         <div class="banner-content">
-            <h1 data-translate="bannerTitle">Najlepsze tapety z uniwersum Minecrafta</h1>
-            <p id="wallpaper-count" data-translate-count="bannerCount">Mamy już {count} tapet</p>
+            <h1 data-translate="bannerTitle" style="ffont-size: 250%;">Najlepsze tapety z uniwersum Minecrafta</h1>
+            <p id="wallpaper-count" data-translate-count="bannerCount" style="font-family: Anton SC; font-size: 150%;">Mamy już 53 tapety</p>
+            
+            <div id="banner-subtext" data-translate="bannerSubtext" style="font-family: Anton SC;">Nowe tapety co tydzień w środy!</div>
         </div>
     </section>
 
@@ -57,59 +98,63 @@
         <div class="category-filter">
             <label for="category-select" data-translate="selectCategory">Wybierz kategorię:</label>
             <select id="category-select">
-                <!-- Category options added by JS -->
+                
             </select>
         </div>
-        <!-- Random Button - Icon Only -->
-        <button id="random-wallpaper-btn" class="icon-button" data-translate="randomButton" aria-label="Losuj tapetę"> <!-- Aria-label updated by JS -->
-             <i class="fas fa-dice"></i>
-        </button>
+        
+        <button id="random-wallpaper-btn" class="icon-button"  aria-label="Losuj tapetę">
+     <i class="fas fa-dice"></i>
+</button>
     </section>
 
     <section class="action-buttons">
+        
         <button id="publish-btn" data-translate="publishButton">Opublikuj tapetę</button>
         <button id="language-btn" data-translate-lang="languageButton">Change to English</button>
     </section>
 
     <main id="wallpaper-grid">
-        <!-- Wallpaper tiles generated by JavaScript -->
-        <!-- Example loading state (optional) -->
-        <!-- <div class="loading-indicator">Ładowanie tapet...</div> -->
+        
     </main>
 
     <footer>
-        <p >© <span id="current-year"></span> MineWallpapers. All rights reserved.</p>
-         <!-- Add social media links etc. here if desired -->
+        
+        <p >© <span id="current-year"></span> MineWallpapers. <span data-translate="footerRights">All rights reserved.</span></p>
     </footer>
 
-    <!-- Modal (Image Preview) -->
+ 
     <div id="image-preview-modal" class="modal">
-         <!-- Close button is direct child for fixed positioning -->
+         
          <span class="close-btn" title="Zamknij podgląd" data-translate-title="closePreview">×</span>
-         <!-- Inner container for content, allows internal scrolling if needed -->
+         
          <div class="modal-inner-content">
-            <!-- Image, prevent dragging -->
+            
             <img class="modal-content-image" id="preview-image" alt="Podgląd tapety" draggable="false">
-            <!-- Container for caption and download button -->
+           
             <div class="modal-caption-container">
                 <div class="modal-caption">
-                     <!-- Wallpaper details section -->
+                     
                      <div class="modal-wallpaper-details">
-                         <h3 id="modal-wallpaper-title"></h3> <!-- Populated by JS -->
-                         <p id="modal-wallpaper-author"></p> <!-- Populated by JS -->
-                         <p id="modal-wallpaper-category" style="display: none;"></p> <!-- Populated & shown by JS if available -->
-                         <p id="modal-wallpaper-description"></p> <!-- Populated by JS -->
+                         <h3 id="modal-wallpaper-title"></h3> 
+                         <p id="modal-wallpaper-author"></p> 
+                         <p id="modal-wallpaper-category" style="display: none;"></p> 
+                         <p id="modal-wallpaper-description"></p> 
                      </div>
-                     <!-- Download/Redirect button -->
+                     
                      <button id="preview-download-button" class="download-btn-modal" data-translate="previewDownload">Pobierz tapetę</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    
+    <button id="scroll-to-top" class="icon-button" aria-label="Scroll to top" data-translate-aria="scrollToTopLabel" style="display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    
     <script src="data.js"></script>
-    <script src="translations.js"></script> <!-- Translations must be before script.js -->
+    <script src="translations.js"></script> 
     <script src="script.js"></script>
 </body>
 </html>

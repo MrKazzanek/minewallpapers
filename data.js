@@ -1,5 +1,155 @@
-// data.js
+
 const wallpapersData = [
+  {
+    id: 55,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/prG0JBq8/Sunset-Hole-by-Bluzers-1920x1080_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/prG0JBq8/Sunset-Hole-by-Bluzers-1920x1080.jpg",
+    download_page_url: "https://www.mediafire.com/file/0fw85nomdhr2a6l/MineWallpapers-Sunset-Hole-by-Bluzers.zip/file",
+    is_new: true
+  },
+  {
+    id: 54,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/Jw45cSWL/Comparing-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/Jw45cSWL/Comparing-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/6kkbuy54imm32xb/MineWallpapers-Comparing-by-Bluzers.zip/file",
+    is_new: true
+  },
+  {
+    id: 53,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/HTDfbNX4/Ocelot-army-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/HTDfbNX4/Ocelot-army-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/26v9jca6ulk0xpe/MineWallpapers-Ocelot-army-by-Bluzers.zip/file",
+    
+  },
+  {
+    id: 52,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/sJWNrwbb/Roasted-rabbit-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/sJWNrwbb/Roasted-rabbit-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/6rfocgpwwy7l84d/MineWallpapers-Roasted-rabbit-by-Bluzers.zip/file"
+  },
+  {
+    id: 51,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/23sZb6gJ/Forest-Cliff-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/23sZb6gJ/Forest-Cliff-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/u2o4vtlr6gi2s5t/MineWallpapers-Forest-Cliff-by-Bluzers.zip/file"
+  },
+  {
+    id: 50,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/ym3ZQmzH/Goodlands-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/ym3ZQmzH/Goodlands-by-Bluzers-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/m4319a3jazyhrik/MineWallpapers-Goodlands-by-Bluzers.zip/file"
+  },
+  {
+    id: 49,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/VGF1DGR/Firefly-Swamp-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/VGF1DGR/Firefly-Swamp-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/v6f1xlbvk7qwtqu/MineWallpapers-Firefly-Swamp.zip/file"
+  },
+  {
+    id: 48,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/ZRyvvqrs/Cherry-Grove-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/ZRyvvqrs/Cherry-Grove-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/ofwgb17ejkcsq27/MineWallpapers-Cherry-grove.zip/file"
+  },
+  {
+    id: 47,
+    author: "Jurajski Staś",
+    image_thumb: "https://i.ibb.co/gj1V4Yy/Refreshed-Birch-Forest-by-Jurajski-Sta-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/gj1V4Yy/Refreshed-Birch-Forest-by-Jurajski-Sta-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/0v3mqku8qrpp1x6/MineWallpapers-Refreshed-B%2Arch-Forest-by-Jurajski-Sta%25C5%259B.zip/file"
+  },
+  {
+    id: 46,
+    author: "FABSKY",
+    image_thumb: "https://i.ibb.co/xjTXyDh/Oriental-Valley-by-FABSKY-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/xjTXyDh/Oriental-Valley-by-FABSKY-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/evnqdr41fm0m7e6/MineWallpapers-Oriental-valley-by-FABSKY.zip/file"
+  },
+  {
+    id: 45,
+    author: "FABSKY",
+    image_thumb: "https://i.ibb.co/61XrHFw/Honeyland-by-FABSKY-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/61XrHFw/Honeyland-by-FABSKY-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/nh4vr8dmus5l1zk/MineWallpapers-Honeyland-by-FABSKY.zip/file"
+  },
+  {
+    id: 44,
+    author: "FABSKY",
+    image_thumb: "https://i.ibb.co/G0qD6dp/Snow-covered-Peaks-by-FABSKY-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/G0qD6dp/Snow-covered-Peaks-by-FABSKY-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/rngnzqhommons8l/MineWallpapers-Snow-covered-Peaks-by-FABSKY.zip/file"
+  },
+  {
+    id: 43,
+    author: "FABSKY",
+    image_thumb: "https://i.ibb.co/SV2Knjg/Lush-Cave-by-FABSKY-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/SV2Knjg/Lush-Cave-by-FABSKY-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/f3u69qtbe293ysa/MineWallpapers-Lush-Cave-by-FABSKY.zip/file"
+  },
+  {
+    id: 42,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/vXLWxtH/Hollywood-Village-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/vXLWxtH/Hollywood-Village-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/naayddn25ipyk6k/MineWallpapers-Hollywood-Village.zip/file"
+  },
+  {
+    id: 41,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/qBdyp2k/Legendary-View-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/qBdyp2k/Legendary-View-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/35fk7kqa6szlj6w/MineWallpapers-Legendary-View.zip/file"
+  },
+  {
+    id: 40,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/XS2gbPW/Pale-Garden-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/XS2gbPW/Pale-Garden-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/0kg5knevogmha2s/MineWallpapers-Pale-garden-Shaders%252BBareBones.zip/file"
+  },
+  {
+    id: 39,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/Zf5yNBM/Steve-Stuck-By-Bluzers-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/Zf5yNBM/Steve-Stuck-By-Bluzers-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/3jjezt01r33g5cu/MineWallpapers-Steve-Stuck-by-Bluzers.zip/file"
+  },
+  {
+    id: 38,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/mTJRF4N/Creak-By-Bluzers-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/mTJRF4N/Creak-By-Bluzers-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/91gawgtirfytqva/MineWallpapers-Creack-by-Bluzers.zip/file"
+  },
+  {
+    id: 37,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/P9kL0Wz/Village-by-the-River-1920-1080-Complementary-Shaders_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/P9kL0Wz/Village-by-the-River-1920-1080-Complementary-Shaders.png",
+    download_page_url: "https://www.mediafire.com/file/fczagzdjzugvf3o/MineWallpapers-Village-by-the-River-Shaders.zip/file"
+  },
+  {
+    id: 36,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/7N7p7g9/Portal-Wall-COMPLEMENTARY-SHADERS-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/7N7p7g9/Portal-Wall-COMPLEMENTARY-SHADERS-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/05mz0fe1zwah2eg/MineWallpapers-Portal-Wall-COMPLEMENTARY-SHADERS.zip/file"
+  },
+  {
+    id: 35,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/HpHf7mQ/Portal-Wall-BSL-Shaders-1920-1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/HpHf7mQ/Portal-Wall-BSL-Shaders-1920-1080.png",
+    download_page_url: "https://www.mediafire.com/file/7q5psbi7kgoxwnz/MineWallpapers-Portal-Wall-BSL-SHADERS.zip/file"
+  },
   {
     id: 34,
     author: "MineWallpapers",
@@ -219,7 +369,7 @@ const wallpapersData = [
   },
   {
     id: 3,
-    author: "MineWallpapers", // Unknown
+    author: "MineWallpapers", 
     image_thumb: "https://i.ibb.co/jkX29dX/Wysokie-G-ry-Shaders-Bare-Bones-1920x1080.png",
     image_full: "https://i.ibb.co/jkX29dX/Wysokie-G-ry-Shaders-Bare-Bones-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/09acd68fnqpujtg/MineWallpapers-Wysokie-G%25C3%25B3ry-Shaders%252BBareBones.zip/file" // <--- EXAMPLE URL - ADD YOURS!
@@ -238,5 +388,5 @@ const wallpapersData = [
     image_full: "https://i.ibb.co/JQmxWMW/Wysokie-G-ry-Vanilla-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/9hpagz53wuhdo1s/MineWallpapers-Wysokie-G%25C3%25B3ry-Vanilla.zip/file" // <--- EXAMPLE URL - ADD YOURS!
   },
-  // --- ADD MORE WALLPAPERS WITH THEIR download_page_url ---
+  
 ];

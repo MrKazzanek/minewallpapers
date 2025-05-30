@@ -34,20 +34,16 @@
                 <input type="text" id="author" name="author" required>
             </div>
 
-            <!-- NOWE: Pole na URL obrazu -->
             <div class="form-group">
                 <label for="image-url">URL Obrazu (pełny rozmiar):</label>
-                <input type="url" id="image-url" name="image-url" required placeholder="np. images/wallpapers/nazwa_pliku.jpg">
-                <small>Podaj ścieżkę do pełnego obrazu. Miniaturka zostanie wygenerowana (jeśli to możliwe) lub użyjemy tej samej ścieżki.</small>
+                <input type="url" id="image-url" name="image-url" required placeholder="np. https://i.ibb.co/nazwa/obraz.png">
+                <small>Podaj pełny URL do obrazu (np. z IBB). Miniaturka *_thumb.png zostanie wygenerowana automatycznie.</small>
             </div>
-            <!-- Koniec NOWEGO pola -->
 
-            <!-- NOWE: Pole na URL strony pobierania -->
              <div class="form-group">
                 <label for="download-page-url">URL Strony Pobierania:</label>
-                <input type="url" id="download-page-url" name="download-page-url" required placeholder="np. https://twoja_strona.pl/download/nazwa-tapety">
+                <input type="url" id="download-page-url" name="download-page-url" required placeholder="np. https://www.mediafire.com/...">
             </div>
-            <!-- Koniec NOWEGO pola -->
 
             <div class="form-group">
                 <label for="description-pl">Opis Tapety (PL) (Opcjonalne):</label>
@@ -67,6 +63,13 @@
                 </select>
             </div>
 
+             <!-- NOWE: Checkbox "Nowa tapeta" -->
+             <div class="form-group form-check">
+                 <input type="checkbox" id="is-new-wallpaper" name="is-new-wallpaper" checked>
+                 <label for="is-new-wallpaper">Nowa tapeta (dodaj tag "Nowa")</label>
+             </div>
+             <!-- Koniec NOWEGO checkboxa -->
+
             <div class="form-actions">
                 <button type="submit" id="generate-btn">Generuj Kod</button>
                 <button type="button" id="clear-btn">Wyczyść Formularz (bez ID)</button>
@@ -80,7 +83,6 @@
                 <h3>1. Wklej do `data.js` (wewnątrz tablicy `wallpapersData`):</h3>
                 <pre><code id="code-data"></code></pre>
                 <button type="button" class="copy-btn" data-target="code-data">Kopiuj</button>
-                <!-- Usunięto notkę o placeholderach, bo URL-e są teraz w formularzu -->
             </div>
 
             <div class="code-block">
