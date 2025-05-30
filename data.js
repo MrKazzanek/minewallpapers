@@ -14,7 +14,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/prG0JBq8/Sunset-Hole-by-Bluzers-1920x1080_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/prG0JBq8/Sunset-Hole-by-Bluzers-1920x1080.jpg",
     download_page_url: "https://www.mediafire.com/file/0fw85nomdhr2a6l/MineWallpapers-Sunset-Hole-by-Bluzers.zip/file",
-    is_new: true
+    
   },
   {
     id: 54,
@@ -22,7 +22,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/Jw45cSWL/Comparing-by-Bluzers-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/Jw45cSWL/Comparing-by-Bluzers-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/6kkbuy54imm32xb/MineWallpapers-Comparing-by-Bluzers.zip/file",
-    is_new: true
+    
   },
   {
     id: 53,
