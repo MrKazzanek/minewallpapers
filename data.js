@@ -1,13 +1,6 @@
 
 const wallpapersData = [
-  {
-    id: 56,
-    author: "FABSKY",
-    image_thumb: "https://i.ibb.co/qYsy3RVy/Oasis-By-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
-    image_full: "https://i.ibb.co/qYsy3RVy/Oasis-By-FABSKY-1920x1080.png",
-    download_page_url: "https://www.mediafire.com/file/rkmjbxegnkdsd95/MineWallpapers-Oasis-by-FABSKY.zip/file",
-    is_new: true
-  },
+  
   {
     id: 55,
     author: "Bluzers",
