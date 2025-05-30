@@ -123,6 +123,7 @@ const wallpaperContentTranslations = {
         54: { title: "Porównywanie", description: "Tapeta z eventu MC Championship x Minecraft 15th Anniversary Party.", category_key: "other" },
         55: { title: "Dziura na Zachod Słońca", description: "Kopiesz dziurę i patrzysz w niebo, co widzisz? Bo ja zachód słońca.", category_key: "other" },
         56: { title: "Oaza", description: "Piękna zielona pełna ciszy oaza. Użyto Bare Bones.", category_key: "landscapes" },
+        57: { title: "Las brzozowy", description: "Las brzozowy niczym z koncept artów. Użyto Bare Bones.", category_key: "landscapes" },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_key: "landscapes" },
@@ -181,6 +182,7 @@ const wallpaperContentTranslations = {
         54: { title: "Comparing", description: "Wallpaper from the MC Championship x Minecraft 15th Anniversary Party event.", category_key: "other" },
         55: { title: "Sunset Hole", description: "You dig a hole and look at the sky, what do you see? Because I see a sunset.", category_key: "other" },
         56: { title: "Oasis", description: "Beautiful green oasis of silence. Bare Bones used.", category_key: "landscapes" },
+        57: { title: "Birch Forest", description: "Birch forest as if from concept art. Bare Bones used.", category_key: "landscapes" },
     }
 };
 
