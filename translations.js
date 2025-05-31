@@ -126,6 +126,7 @@ const wallpaperContentTranslations = {
         57: { title: "Las brzozowy", description: "Las brzozowy niczym z koncept artów. Użyto Bare Bones.", category_key: "landscapes" },
         58: { title: "Zamek", description: "Piękny średniowieczny zamek na namorzynach. Użyto Bare Bones.", category_key: "builds" },
         59: { title: "Zamglony pustynny widok na zachód", description: "Pustynny krajobraz z widokiem na słońce. W tle Dżungla.", category_key: "vibrant" },
+        60: { title: "Główna wyspa endu", description: "Tapeta prezentuje główną wyspę w wymiarze endu. Widać też na niej smoka kresu, który siedzi w swoim gnieździe.", category_key: "vibrant" },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_key: "landscapes" },
@@ -187,6 +188,7 @@ const wallpaperContentTranslations = {
         57: { title: "Birch Forest", description: "Birch forest as if from concept art. Bare Bones used.", category_key: "landscapes" },
         58: { title: "Castle", description: "Beautiful medieval castle in the mangroves. Bare Bones used.", category_key: "builds" },
         59: { title: "Misty desert view to the west", description: "Desert landscape with a view of the sun. Jungle in the background.", category_key: "vibrant" },
+        60: { title: "The main island of the end", description: "The wallpaper shows the main island in the End dimension. It also shows the End dragon sitting in its nest.", category_key: "vibrant" },
     }
 };
 
