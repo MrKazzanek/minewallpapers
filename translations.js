@@ -62,7 +62,7 @@ const interfaceTranslations = {
 };
 
 const categoryDefinitions = {
-    all: { pl: "Wszystkie", en: "All" }, landscapes: { pl: "Krajobrazy", en: "Landscapes" }, builds: { pl: "Budowle", en: "Builds" }, updates: { pl: "Aktualizacje", en: "Updates" }, structures: { pl: "Struktury", en: "Structures" },  dungeons: { pl: "Minecraft Dungeons", en: "Minecraft Dungeons" }, legends: { pl: "Minecraft Legends", en: "Minecraft Legends" }, movie: { pl: "Film Minecraft", en: "Minecraft Movie" }, mods: { pl: "Modyfikacje", en: "Modifications" }, other: { pl: "Inne", en: "Other" }
+    all: { pl: "Wszystkie", en: "All" }, landscapes: { pl: "Krajobrazy", en: "Landscapes" }, builds: { pl: "Budowle", en: "Builds" }, updates: { pl: "Aktualizacje", en: "Updates" }, structures: { pl: "Struktury", en: "Structures" },  dungeons: { pl: "Minecraft Dungeons", en: "Minecraft Dungeons" }, legends: { pl: "Minecraft Legends", en: "Minecraft Legends" }, movie: { pl: "Film Minecraft", en: "Minecraft Movie" }, mods: { pl: "Modyfikacje", en: "Modifications" },vibrant: {pl:"", en:""}, other: { pl: "Inne", en: "Other" }
 };
 
 const wallpaperContentTranslations = {
