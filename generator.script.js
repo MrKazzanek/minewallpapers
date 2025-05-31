@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const availableCategories = {
         landscapes: "Krajobrazy", builds: "Budowle", updates: "Aktualizacje",
         structures: "Struktury", dungeons: "Minecraft Dungeons", legends: "Minecraft Legends",
-        movie: "Film Minecraft", mods: "Modyfikacje", other: "Inne"
+        movie: "Film Minecraft", mods: "Modyfikacje", vibrant: "Vibrant Visuals",other: "Inne"
     };
 
     // --- Inicjalizacja ---
