@@ -1,6 +1,14 @@
 
 const wallpapersData = [
    {
+    id: 59,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/JWNrG3tL/Misty-desert-view-to-the-west-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/JWNrG3tL/Misty-desert-view-to-the-west-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/tu5m6the62zozlq/MineWallpapers-Misty-desert-view-to-the-west.zip/file",
+    is_new: true
+  },
+   {
     id: 58,
     author: "FABSKY",
     image_thumb: "https://i.ibb.co/9HMKht07/Castle-by-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
