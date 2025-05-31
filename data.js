@@ -1,6 +1,14 @@
 
 const wallpapersData = [
    {
+    id: 60,
+    author: "MineWallpapers",
+    image_thumb: "https://i.ibb.co/7xkWFBX4/The-main-island-of-the-end-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/7xkWFBX4/The-main-island-of-the-end-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/bh2vcv15vyufk18/MineWallpapers-The-main-island-of-the-end.zip/file",
+    is_new: true
+  },
+   {
     id: 59,
     author: "MineWallpapers",
     image_thumb: "https://i.ibb.co/JWNrG3tL/Misty-desert-view-to-the-west-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
