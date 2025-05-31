@@ -1,6 +1,14 @@
 
 const wallpapersData = [
   {
+    id: 58,
+    author: "FABSKY",
+    image_thumb: "https://i.ibb.co/9HMKht07/Castle-by-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/9HMKht07/Castle-by-FABSKY-1920x1080.png",
+    download_page_url: "https://www.mediafire.com/file/dstsda3qjbo55f3/MineWallpapers-Castle-by-FABSKY.zip/file",
+    is_new: true
+  },
+  {
     id: 57,
     author: "FABSKY",
     image_thumb: "https://i.ibb.co/B2sBprRp/Birch-Forest-by-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
