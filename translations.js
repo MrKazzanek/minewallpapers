@@ -125,6 +125,7 @@ const wallpaperContentTranslations = {
         56: { title: "Oaza", description: "Piękna zielona pełna ciszy oaza. Użyto Bare Bones.", category_key: "landscapes" },
         57: { title: "Las brzozowy", description: "Las brzozowy niczym z koncept artów. Użyto Bare Bones.", category_key: "landscapes" },
         58: { title: "Zamek", description: "Piękny średniowieczny zamek na namorzynach. Użyto Bare Bones.", category_key: "builds" },
+        59: { title: "Zamglony pustynny widok na zachód", description: "Pustynny krajobraz z widokiem na słońce. W tle Dżungla.", category_key: "vibrant" },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_key: "landscapes" },
@@ -185,6 +186,7 @@ const wallpaperContentTranslations = {
         56: { title: "Oasis", description: "Beautiful green oasis of silence. Bare Bones used.", category_key: "landscapes" },
         57: { title: "Birch Forest", description: "Birch forest as if from concept art. Bare Bones used.", category_key: "landscapes" },
         58: { title: "Castle", description: "Beautiful medieval castle in the mangroves. Bare Bones used.", category_key: "builds" },
+        59: { title: "Misty desert view to the west", description: "Desert landscape with a view of the sun. Jungle in the background.", category_key: "vibrant" },
     }
 };
 
