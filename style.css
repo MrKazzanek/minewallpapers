@@ -188,6 +188,7 @@ body.dark-theme .wallpaper-item .author { color: #adb5bd; }
 .wallpaper-item .category-tag[data-category-key="legends"] { background-color: var(--tag-color-legends); color: var(--tag-text-color-on-light); }
 .wallpaper-item .category-tag[data-category-key="movie"] { background-color: var(--tag-color-movie); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="mods"] { background-color: var(--tag-color-mods); color: var(--tag-text-color-on-dark); }
+.wallpaper-item .category-tag[data-category-key="vibrant"] { background-color: #0ad6ff; color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="other"] { background-color: var(--tag-color-other); color: var(--tag-text-color-on-light); }
 
 .wallpaper-item .download-btn { display: block; width: 100%; padding: 0.6em 1rem; background-color: var(--button-bg); color: var(--button-text); text-decoration: none; border-radius: 0.25rem; text-align: center; transition: background-color 0.2s ease; font-size: 0.95em; font-weight: bold; border: none; flex-shrink: 0; cursor: pointer; margin-top: auto; }
