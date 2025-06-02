@@ -1,12 +1,20 @@
 
 const wallpapersData = [
    {
+    id: 61,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/jkGP0hq7/obj-matte-The-End-Mansion-Flat-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/jkGP0hq7/obj-matte-The-End-Mansion-Flat-Bluzers-minecraft.png",
+    download_page_url: "https://www.mediafire.com/file/vpoz4ir4f14uztb/MineWallpapers-End-Overworld-by-Bluzers.zip/file",
+    is_new: true
+  },
+   {
     id: 60,
     author: "MineWallpapers",
     image_thumb: "https://i.ibb.co/7xkWFBX4/The-main-island-of-the-end-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/7xkWFBX4/The-main-island-of-the-end-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/bh2vcv15vyufk18/MineWallpapers-The-main-island-of-the-end.zip/file",
-    is_new: true
+    
   },
    {
     id: 59,
@@ -14,7 +22,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/JWNrG3tL/Misty-desert-view-to-the-west-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/JWNrG3tL/Misty-desert-view-to-the-west-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/tu5m6the62zozlq/MineWallpapers-Misty-desert-view-to-the-west.zip/file",
-    is_new: true
+    
   },
    {
     id: 58,
@@ -22,7 +30,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/9HMKht07/Castle-by-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/9HMKht07/Castle-by-FABSKY-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/dstsda3qjbo55f3/MineWallpapers-Castle-by-FABSKY.zip/file",
-    is_new: true
+    
   },
   {
     id: 57,
@@ -30,7 +38,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/B2sBprRp/Birch-Forest-by-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/B2sBprRp/Birch-Forest-by-FABSKY-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/cv76576oyux1nfr/MineWallpapers-Birch-Forest-by-FABSKY.zip/file",
-    is_new: true
+    
   },
   {
     id: 56,
@@ -38,7 +46,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/qYsy3RVy/Oasis-By-FABSKY-1920x1080_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/qYsy3RVy/Oasis-By-FABSKY-1920x1080.png",
     download_page_url: "https://www.mediafire.com/file/rkmjbxegnkdsd95/MineWallpapers-Oasis-by-FABSKY.zip/file",
-    is_new: true
+    
   },
   {
     id: 55,
