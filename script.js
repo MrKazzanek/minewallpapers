@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- JAWNE UKRYCIE MODALA PODGLĄDU NA STARCIE ---
+    const imagePreviewModalForStartup = document.getElementById('image-preview-modal');
+    if (imagePreviewModalForStartup) {
+        imagePreviewModalForStartup.style.display = 'none';
+    }
+    // --- KONIEC JAWNEGO UKRYCIA ---
+
     // --- DOM Elements ---
     const wallpaperGrid = document.getElementById('wallpaper-grid');
     const categorySelect = document.getElementById('category-select');
