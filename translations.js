@@ -5,7 +5,7 @@ const interfaceTranslations = {
         searchPlaceholder: "Szukaj tapet...",
         bannerTitle: "Najlepsze tapety z uniwersum Minecrafta",
         bannerCount: "Mamy już {count} tapet",
-        bannerSubtext: "Nowe tapety co tydzień w środy!", // Point 4
+        bannerSubtext: "Często nowe tapety!", // Point 4
         selectCategory: "Kategoria:",
         randomButton: "Losuj tapetę", // Text for aria-label
         publishButton: "Opublikuj tapetę",
@@ -34,7 +34,7 @@ const interfaceTranslations = {
         searchPlaceholder: "Search wallpapers...",
         bannerTitle: "The best wallpapers from the Minecraft universe",
         bannerCount: "We already have {count} wallpapers",
-        bannerSubtext: "New wallpapers every week on Wednesdays!", // Point 4
+        bannerSubtext: "New wallpapers often!", // Point 4
         selectCategory: "Category:",
         randomButton: "Random wallpaper", // Text for aria-label
         publishButton: "Publish wallpaper",
