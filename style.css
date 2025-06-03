@@ -244,10 +244,10 @@ body.dark-theme .wallpaper-item .author { color: #bbb; }
 .wallpaper-item .category-tag[data-category-key="shaders"] { background-color: var(--tag-color-shaders); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="shaders_bare_bones"] { background-color: var(--tag-color-shaders_bare_bones); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="dungeons"] { background-color: var(--tag-color-dungeons); color: var(--tag-text-color-on-dark); }
-.wallpaper-item .category-tag[data-category-key="legends"] { background-color: var(--tag-color-legends); color: var(--tag-text-color-on-light); }
+.wallpaper-item .category-tag[data-category-key="legends"] { background-color: var(--tag-color-legends); color: black; }
 .wallpaper-item .category-tag[data-category-key="movie"] { background-color: var(--tag-color-movie); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="mods"] { background-color: var(--tag-color-mods); color: var(--tag-text-color-on-dark); }
-.wallpaper-item .category-tag[data-category-key="vibrant"] { background-color: #0ad6ff; color: var(--tag-text-color-on-dark); }
+.wallpaper-item .category-tag[data-category-key="vibrant"] { background-color: #0ad6ff; color: black; }
 .wallpaper-item .category-tag[data-category-key="other"] { background-color: var(--tag-color-other); color: black; }
 
 .wallpaper-item .download-btn { display: block; width: 100%; padding: 0.75em 1.3rem; background-color: var(--button-bg); color: var(--button-text); text-decoration: none; border-radius: var(--global-radius); text-align: center; transition: background-color 0.2s ease, transform 0.1s ease; font-size: 1.05em; font-weight: 500; border: none; flex-shrink: 0; cursor: pointer; margin-top: auto; }
