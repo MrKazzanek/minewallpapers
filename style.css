@@ -158,6 +158,7 @@ button:not(.icon-button):hover { background-color: var(--button-hover-bg); borde
     color: var(--button-text);
     border-color: var(--button-bg);
     font-size: 1.3rem;
+    flex: 0 0 auto; /* FIX: Ensure button doesn't grow/shrink */
 }
 #random-wallpaper-btn.icon-button:hover {
     background-color: var(--button-hover-bg);
@@ -199,9 +200,24 @@ header .logo img { height: 40px; /* Większe logo */ flex-shrink: 0; pointer-eve
 
 .filter-controls, .action-buttons { display: flex; justify-content: center; flex-wrap: wrap; align-items: center; padding: 1.75rem 1.5rem; /* Większy padding */ gap: 1.5rem; /* Większe odstępy */ }
 .filter-controls { background-color: var(--card-bg); border-bottom: 1px solid var(--card-border); transition: background-color 0.3s ease, border-bottom 0.3s ease; }
-.category-filter { display: flex; align-items: center; gap: 0.85rem; }
-.category-filter label { font-weight: 500; white-space: nowrap; }
-#category-select { min-width: 240px; /* Szerszy select */ }
+
+.category-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex: 1 1 auto; /* FIX: Allow .category-filter to grow and shrink */
+    min-width: 0;   /* FIX: Crucial for preventing overflow with flex children */
+}
+.category-filter label {
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0; /* FIX: Prevent label from shrinking */
+}
+#category-select {
+    min-width: 240px; /* Szerszy select */
+    flex-grow: 1; /* FIX: Allow select to take up remaining space */
+}
+
 .action-buttons button#language-btn { background-color: var(--button-bg); border-color: var(--button-bg); }
 .action-buttons button#language-btn:hover { background-color: var(--button-hover-bg); border-color: var(--button-hover-bg); }
 
@@ -252,7 +268,7 @@ body.dark-theme .wallpaper-item .author { color: #bbb; }
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    flex-shrink: 0; 
+    flex-shrink: 0;
     padding-top: 15px;
     /* USUNIĘTE: overflow-y: auto; */
     /* USUNIĘTE: max-height: 30vh; */
@@ -275,9 +291,79 @@ body.dark-theme .wallpaper-item .author { color: #bbb; }
 footer { text-align: center; padding: 2.5rem 1.5rem; /* Więcej paddingu */ margin-top: 3rem; background-color: var(--footer-bg); border-top: 1px solid var(--header-border); color: var(--footer-text); font-size: 0.925em; transition: background-color 0.3s ease, border-top 0.3s ease, color 0.3s ease; }
 
 /* Media Queries - dostosowane do nowych większych elementów */
-@media (max-width: 991.98px) { header { padding: 0.9rem 1.25rem; } #wallpaper-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); padding: 1.5rem; gap: 1.5rem; } .banner h1 { font-size: clamp(2rem, 5vw, 2.8rem); } .banner p { font-size: clamp(1.05rem, 3.2vw, 1.3rem); } }
-@media (max-width: 767.98px) { header { flex-wrap: wrap; justify-content: space-between; padding-bottom: 0.85rem; } .search-container { order: 3; width: 100%; margin-top: 1.15rem; max-width: none; } .controls-right { order: 2; } .logo { order: 1; } .filter-controls { justify-content: space-between; padding: 1.5rem 1rem; } #category-select { min-width: 200px; } .action-buttons { padding: 1.5rem 1rem; } #wallpaper-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); } .modal { padding: 15px; } .modal-inner-content { padding: 25px; } #image-preview-modal .modal-content-image { max-height: calc(90vh - 260px); } #image-preview-modal .modal-caption-container { /* max-height: none; - usunięte, pozwalamy flexboxowi zarządzać */ } #image-preview-modal .modal-wallpaper-details { padding: 20px; } #image-preview-modal .modal-wallpaper-details h3 { font-size: 1.4em; } #image-preview-modal .modal-wallpaper-details p { font-size: 1em; } }
-@media (max-width: 575.98px) { body { font-size: 0.975rem; } header { padding: 0.85rem; } .controls-right { gap: 0.6rem; } .icon-button { width: 38px; height: 38px; font-size: 1.1rem; } #random-wallpaper-btn.icon-button { font-size: 1.2rem; } .banner { padding: 3rem 1rem; } .action-buttons { flex-direction: column; align-items: stretch; gap: 0.85rem; } #wallpaper-grid { grid-template-columns: 1fr; padding: 1.25rem; gap: 1.25rem; } .wallpaper-item h3 { font-size: 1.2em; } .wallpaper-info { padding: 1.25rem; } .filter-controls { justify-content: center; } #category-select { min-width: 100%; } footer { padding: 2rem 1rem; font-size: 0.9em; } .modal-inner-content { padding: 20px; } #image-preview-modal .modal-content-image { max-height: calc(90vh - 220px); } #image-preview-modal .modal-caption-container { /* max-height: none; - usunięte */ } }
+@media (max-width: 991.98px) {
+    header { padding: 0.9rem 1.25rem; }
+    #wallpaper-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); padding: 1.5rem; gap: 1.5rem; }
+    .banner h1 { font-size: clamp(2rem, 5vw, 2.8rem); }
+    .banner p { font-size: clamp(1.05rem, 3.2vw, 1.3rem); }
+}
+
+@media (max-width: 767.98px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0.9rem 1.25rem;
+        padding-bottom: 0.85rem;
+    }
+    header .logo img {
+        height: 35px; /* FIX: Reduced logo height */
+    }
+    .search-container {
+        order: 3;
+        width: 100%;
+        margin-top: 1.15rem;
+        max-width: none;
+    }
+    .controls-right { order: 2; }
+    .logo { order: 1; }
+    .filter-controls {
+        justify-content: space-between;
+        padding: 1.5rem 1rem;
+    }
+    #category-select { min-width: 200px; }
+    .action-buttons { padding: 1.5rem 1rem; }
+    #wallpaper-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .modal { padding: 15px; }
+    .modal-inner-content { padding: 25px; }
+    #image-preview-modal .modal-content-image { max-height: calc(90vh - 260px); }
+    #image-preview-modal .modal-wallpaper-details { padding: 20px; }
+    #image-preview-modal .modal-wallpaper-details h3 { font-size: 1.4em; }
+    #image-preview-modal .modal-wallpaper-details p { font-size: 1em; }
+}
+
+@media (max-width: 575.98px) {
+    body { font-size: 0.975rem; }
+    header { padding: 0.85rem; }
+    header .logo img {
+        height: 30px; /* FIX: Further reduced logo height */
+    }
+    .controls-right { gap: 0.6rem; }
+    .icon-button { width: 38px; height: 38px; font-size: 1.1rem; }
+    #random-wallpaper-btn.icon-button { font-size: 1.2rem; }
+    .banner { padding: 3rem 1rem; }
+    .action-buttons { flex-direction: column; align-items: stretch; gap: 0.85rem; }
+    #wallpaper-grid { grid-template-columns: 1fr; padding: 1.25rem; gap: 1.25rem; }
+    .wallpaper-item h3 { font-size: 1.2em; }
+    .wallpaper-info { padding: 1.25rem; }
+    .filter-controls {
+        justify-content: center;
+        flex-direction: column; /* FIX: Stack filter items vertically */
+        align-items: center;    /* FIX: Center items when stacked */
+        gap: 1rem; /* Adjust gap if needed */
+    }
+    .category-filter {
+        width: 100%;    /* FIX: Make .category-filter take full width */
+        flex-grow: 0;   /* FIX: No need for grow/shrink if full width */
+        min-width: auto;/* FIX: Reset min-width */
+    }
+    #category-select {
+        min-width: 100%; /* Ensures select uses the full width of category-filter */
+        width: 100%;     /* FIX: Makes select fill its parent */
+    }
+    footer { padding: 2rem 1rem; font-size: 0.9em; }
+    .modal-inner-content { padding: 20px; }
+    #image-preview-modal .modal-content-image { max-height: calc(90vh - 220px); }
+}
 
 #loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease-out; }
 #loading-screen img { max-width: 200px; margin-bottom: 20px; pointer-events: auto !important; }
