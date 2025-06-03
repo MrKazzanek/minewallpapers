@@ -238,7 +238,7 @@ body.dark-theme .wallpaper-item .author { color: #bbb; }
 .wallpaper-item .category-tag { font-size: 0.85em; display: block; width: 100%; text-align: center; padding: 0.55em 0.75em; border-radius: var(--global-radius); margin-top: auto; margin-bottom: 1.25rem; background-color: var(--tag-color-default); color: var(--tag-text-color-on-light); font-weight: 500; transition: background-color 0.3s ease, color 0.3s ease; flex-shrink: 0; }
 .wallpaper-item .category-tag[data-category-key="landscapes"] { background-color: var(--tag-color-landscapes); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="builds"] { background-color: var(--tag-color-builds); color: var(--tag-text-color-on-dark); }
-.wallpaper-item .category-tag[data-category-key="updates"] { background-color: var(--tag-color-updates); color: var(--tag-text-color-on-light); }
+.wallpaper-item .category-tag[data-category-key="updates"] { background-color: var(--tag-color-updates); color: black; }
 .wallpaper-item .category-tag[data-category-key="structures"] { background-color: var(--tag-color-structures); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="vanilla"] { background-color: var(--tag-color-vanilla); color: var(--tag-text-color-on-dark); }
 .wallpaper-item .category-tag[data-category-key="shaders"] { background-color: var(--tag-color-shaders); color: var(--tag-text-color-on-dark); }
