@@ -14,7 +14,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/jkGP0hq7/obj-matte-The-End-Mansion-Flat-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/jkGP0hq7/obj-matte-The-End-Mansion-Flat-Bluzers-minecraft.png",
     download_page_url: "https://www.mediafire.com/file/vpoz4ir4f14uztb/MineWallpapers-End-Overworld-by-Bluzers.zip/file",
-    is_new: true
+    
   },
    {
     id: 60,
