@@ -1,6 +1,14 @@
 
 const wallpapersData = [
    {
+    id: 63,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/bMfCxb15/x_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/bMfCxb15/x.jpg",
+    download_page_url: "https://www.mediafire.com/file/80vsxe5tmwvkjjv/MineWallpapers-Drowned-by-Bluzers.zip/file",
+    is_new: true
+  },
+   {
     id: 62,
     author: "MineWallpapers",
     image_thumb: "https://i.ibb.co/k2509dF6/Zrzut-ekranu-56_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
