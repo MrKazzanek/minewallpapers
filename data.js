@@ -1,6 +1,14 @@
 
 const wallpapersData = [
    {
+    id: 64,
+    author: "Bluzers",
+    image_thumb: "https://i.ibb.co/cdwzh2V/a_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/cdwzh2V/a.png",
+    download_page_url: "https://www.mediafire.com/file/veuwwv8g5v4crnr/MineWallpapers-Cubeworld-by-Bluzers.zip/file",
+    is_new: true
+  },
+   {
     id: 63,
     author: "Bluzers",
     image_thumb: "https://i.ibb.co/bMfCxb15/x_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
