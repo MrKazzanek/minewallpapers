@@ -130,6 +130,7 @@ const wallpaperContentTranslations = {
         61: { title: "Fałszywy świat główny", description: "Fałszywy Overworld z Minecraft Story Mode.", category_key: "builds" },
         62: { title: "Chmurnikraft", description: "Minecraftowa noc z kwadratowym księżycem w centrum, otoczona pikselowymi chmurami i gwiazdami — idealna do bujania w obłokach.", category_key: "vibrant" },
         63: { title: "Utopiec", description: "Utopiec na pakiecie zasobów Actions & Stuff.", category_key: "other" },
+        64: { title: "Świat Kostek", description: "Sześcienny świat w każdym kierunku.", category_key: "landscapes" },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_key: "landscapes" },
@@ -195,6 +196,7 @@ const wallpaperContentTranslations = {
         61: { title: "End Overworld", description: "Fake Overworld from Minecraft Story Mode.", category_key: "builds" },
         62: { title: "Cloudcraft", description: "A Minecraft night with a square moon in the center, surrounded by pixelated clouds and stars - perfect for daydreaming.", category_key: "vibrant" },
         63: { title: "Drowned", description: "Drowned with Actions & Stuff resourcepack.", category_key: "other" },
+        64: { title: "Cubeworld", description: "Cubic world in every direction.", category_key: "landscapes" },
     }
 };
 
