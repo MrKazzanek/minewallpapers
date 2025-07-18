@@ -132,6 +132,7 @@ const wallpaperContentTranslations = {
         63: { title: "Utopiec", description: "Utopiec na pakiecie zasobów Actions & Stuff.", category_key: "other" },
         64: { title: "Świat Kostek", description: "Sześcienny świat w każdym kierunku.", category_key: "landscapes" },
         65: { title: "Mglista Góra", description: "Góra w mgle a za nią słońce.", category_key: "landscapes" },
+        66: { title: "Zamglona góra podczas wschodu", description: "Zamglona góra a za nią wschód słońca.", category_key: "landscapes" },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_key: "landscapes" },
@@ -199,6 +200,7 @@ const wallpaperContentTranslations = {
         63: { title: "Drowned", description: "Drowned with Actions & Stuff resourcepack.", category_key: "other" },
         64: { title: "Cubeworld", description: "Cubic world in every direction.", category_key: "landscapes" },
         65: { title: "Misty Mountain", description: "A mountain in the fog and the sun behind it.", category_key: "landscapes" },
+        66: { title: "Misty Mountain Sunrise", description: "A misty mountain and the sunrise behind it.", category_key: "landscapes" },
     }
 };
 
