@@ -119,51 +119,58 @@ document.addEventListener('DOMContentLoaded', () => {
     function closePreviewModal() {
         if (!modal) return;
         modal.style.display = "none";
-        document.body.classList.remove('modal-open');
+        if (slideshowModal.style.display !== 'flex') {
+            document.body.classList.remove('modal-open');
+        }
+    }
+    
+    // --- Slideshow Functions ---
+    function showSlide(index) {
+        if (index >= slideshowWallpapers.length) {
+            stopSlideshow();
+            return;
+        }
+        const wallpaper = slideshowWallpapers[index];
+        slideshowImage.style.opacity = 0;
+        const tempImg = new Image();
+        tempImg.src = wallpaper.image_full;
+        tempImg.onload = () => {
+            slideshowImage.src = tempImg.src;
+            slideshowImage.style.opacity = 1;
+        };
+        const progress = ((index + 1) / slideshowWallpapers.length) * 100;
+        slideshowProgressBar.style.width = `${progress}%`;
     }
 
-    // --- Slideshow Functions ---
     function startSlideshow() {
         if (filteredWallpapers.length === 0) {
             alert(getInterfaceTranslation('noResults', currentLanguage));
             return;
         }
         slideshowWallpapers = [...filteredWallpapers];
-        slideshowCurrentIndex = -1;
+        slideshowCurrentIndex = 0;
         isSlideshowPaused = false;
+        
         slideshowModal.style.display = 'flex';
         document.body.classList.add('modal-open');
-        nextSlide();
-    }
+        
+        showSlide(slideshowCurrentIndex);
 
+        slideshowInterval = setInterval(() => {
+            slideshowCurrentIndex++;
+            showSlide(slideshowCurrentIndex);
+        }, SLIDESHOW_DELAY);
+    }
+    
     function stopSlideshow() {
         clearInterval(slideshowInterval);
         slideshowModal.style.display = 'none';
         slideshowPausedOverlay.classList.remove('visible');
-        document.body.classList.remove('modal-open');
-    }
-
-    function nextSlide() {
-        if (isSlideshowPaused) return;
-        slideshowCurrentIndex++;
-        if (slideshowCurrentIndex >= slideshowWallpapers.length) {
-            stopSlideshow();
-            return;
+        if (modal.style.display !== 'flex') {
+             document.body.classList.remove('modal-open');
         }
-        const wallpaper = slideshowWallpapers[slideshowCurrentIndex];
-        slideshowImage.style.opacity = 0;
-        setTimeout(() => {
-            slideshowImage.src = wallpaper.image_full;
-            slideshowImage.style.opacity = 1;
-        }, 300);
-
-        const progress = ((slideshowCurrentIndex + 1) / slideshowWallpapers.length) * 100;
-        slideshowProgressBar.style.width = `${progress}%`;
-
-        clearInterval(slideshowInterval);
-        slideshowInterval = setInterval(nextSlide, SLIDESHOW_DELAY);
     }
-
+    
     function pauseSlideshow() {
         if (isSlideshowPaused) return;
         isSlideshowPaused = true;
@@ -182,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         slideshowDescription.textContent = wallpaperText.description || '';
         slideshowDownloadLink.href = wallpaperBase.download_page_url || '#';
-
+        
         slideshowPausedOverlay.style.display = 'flex';
         setTimeout(() => slideshowPausedOverlay.classList.add('visible'), 10);
     }
@@ -190,13 +197,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function resumeSlideshow() {
         isSlideshowPaused = false;
         slideshowPausedOverlay.classList.remove('visible');
-        setTimeout(() => {
-            slideshowPausedOverlay.style.display = 'none'
+        setTimeout(() => { 
+            slideshowPausedOverlay.style.display = 'none' 
         }, 300);
-        nextSlide(); // Call nextSlide to restart the timer
+        
+        slideshowInterval = setInterval(() => {
+            slideshowCurrentIndex++;
+            showSlide(slideshowCurrentIndex);
+        }, SLIDESHOW_DELAY);
     }
-
-    // --- UI Update Functions ---
+    
+    // --- UI Update & Filter Functions ---
     function updateStaticTexts(lang) {
         document.documentElement.lang = lang;
         document.querySelectorAll('[data-translate]').forEach(el => el.innerHTML = getInterfaceTranslation(el.getAttribute('data-translate'), lang));
@@ -225,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         categorySelect.value = categoryDefinitions[currentCategoryValue] || currentCategoryValue === 'all' ? currentCategoryValue : 'all';
     }
-
+    
     function displayWallpapers(wallpapersToDisplay) {
         if (!wallpaperGrid) return;
         wallpaperGrid.innerHTML = '';
@@ -272,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         wallpaperGrid.appendChild(fragment);
     }
-
+    
     function filterAndSearchWallpapers() {
         const selectedCategoryKey = categorySelect ? categorySelect.value : 'all';
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -388,26 +399,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
     categorySelect?.addEventListener('change', filterAndSearchWallpapers);
     searchInput?.addEventListener('input', filterAndSearchWallpapers);
-
+    
     randomWallpaperBtn?.addEventListener('click', (event) => {
         event.preventDefault();
-        if (filteredWallpapers.length === 0) {
-            alert(getInterfaceTranslation('noResults', currentLanguage));
-            return;
-        }
-
-        if (randomizableWallpaperIds.length === 0) {
-            // If the pool is empty but there are filtered wallpapers, reset the pool
+        
+        if (randomizableWallpaperIds.length === 0 && filteredWallpapers.length > 0) {
             randomizableWallpaperIds = filteredWallpapers.map(w => w.id);
-            alert(getInterfaceTranslation('allWallpapersRandomized', currentLanguage));
+        }
+        
+        if (randomizableWallpaperIds.length === 0) {
+            alert(getInterfaceTranslation(filteredWallpapers.length > 0 ? 'allWallpapersRandomized' : 'noResults', currentLanguage));
+            return;
         }
 
         const randomIndex = Math.floor(Math.random() * randomizableWallpaperIds.length);
         const wallpaperId = randomizableWallpaperIds[randomIndex];
         openPreviewModal(wallpaperId);
-        // Remove from pool so it's not picked again until reset
+        
         randomizableWallpaperIds.splice(randomIndex, 1);
-
+        
         randomWallpaperBtn.blur();
     });
 
@@ -415,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
     slideshowImage?.addEventListener('click', pauseSlideshow);
     slideshowResumeBtn?.addEventListener('click', resumeSlideshow);
     [slideshowCloseBtn, slideshowClosePausedBtn].forEach(btn => btn?.addEventListener('click', stopSlideshow));
-
+    
     publishBtn?.addEventListener('click', () => { window.open(currentLanguage === 'pl' ? 'https://forms.gle/bMWDted25PYNMuPT9' : 'https://forms.gle/eAzL1uLp7R3zV1C88', '_blank'); });
     languageBtn?.addEventListener('click', () => {
         currentLanguage = currentLanguage === 'pl' ? 'en' : 'pl';
@@ -424,23 +434,23 @@ document.addEventListener('DOMContentLoaded', () => {
         populateCategories(currentLanguage);
         filterAndSearchWallpapers();
     });
-
+    
     closeModalBtn?.addEventListener('click', closePreviewModal);
     modal?.addEventListener('click', (e) => { if (e.target === modal) closePreviewModal(); });
-
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === "Escape") {
             if (modal?.style.display === 'flex') closePreviewModal();
             if (slideshowModal?.style.display === 'flex') stopSlideshow();
         }
     });
-
+    
     themeToggleButton?.addEventListener('click', () => {
         const currentTheme = localStorage.getItem('mineWallpapersTheme') || 'system';
         const nextIndex = (themeOrder.indexOf(currentTheme) + 1) % themeOrder.length;
         setTheme(themeOrder[nextIndex]);
     });
-
+    
     logoLink?.addEventListener('click', (e) => {
         e.preventDefault();
         if(searchInput) searchInput.value = '';
@@ -448,10 +458,10 @@ document.addEventListener('DOMContentLoaded', () => {
         filterAndSearchWallpapers();
         window.scrollTo({ top: 0, behavior: 'auto' });
     });
-
+    
     window.addEventListener('scroll', () => {
         if(scrollToTopBtn) scrollToTopBtn.classList.toggle('visible', window.scrollY > 200);
     });
-
+    
     scrollToTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
