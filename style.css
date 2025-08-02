@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
 @font-face {
   font-family: 'minecraft';
-  src: url('https://cdn.glitch.global/727c1065-3b4f-4b3T-8574-09ecfc8c52a3/MinecraftTen.ttf?v=1727370351890') format('truetype');
+  src: url('https://cdn.glitch.global/727c1065-3b4f-4b37-8574-09ecfc8c52a3/MinecraftTen.ttf?v=1727370351890') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -185,9 +185,11 @@ input, textarea { user-select: text; -webkit-user-select: text; -moz-user-select
 
 header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.75rem; background-color: var(--header-bg); border-bottom: 1px solid var(--header-border); position: sticky; top: 0; z-index: 1030; transition: background-color 0.3s ease, border-bottom 0.3s ease, box-shadow 0.3s ease; gap: 1.25rem; box-shadow: var(--header-shadow); }
 header .logo img { height: 40px; flex-shrink: 0; pointer-events: auto !important; transition: filter 0.3s ease; }
+
 body:not(.dark-theme) header .logo img {
     filter: invert(1);
 }
+
 .search-container { flex-grow: 1; max-width: 550px; min-width: 180px; }
 .controls-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
 .menu-toggle { display: none; background: none; border: none; font-size: 1.5em; color: var(--text-color); padding: 0.25rem 0.5rem; cursor: pointer; }
@@ -286,8 +288,6 @@ body:not(.dark-theme) .slideshow-paused-controls a.icon-button { background-colo
 body:not(.dark-theme) .slideshow-paused-controls .icon-button:hover,
 body:not(.dark-theme) .slideshow-paused-controls a.icon-button:hover { background-color: rgba(0, 0, 0, 0.1); }
 /* --- END SLIDESHOW STYLES --- */
-
-footer { text-align: center; padding: 2.5rem 1.5rem; margin-top: 3rem; background-color: var(--footer-bg); border-top: 1px solid var(--header-border); color: var(--footer-text); font-size: 0.925em; transition: background-color 0.3s ease, border-top 0.3s ease, color 0.3s ease; }
 
 footer { text-align: center; padding: 2.5rem 1.5rem; margin-top: 3rem; background-color: var(--footer-bg); border-top: 1px solid var(--header-border); color: var(--footer-text); font-size: 0.925em; transition: background-color 0.3s ease, border-top 0.3s ease, color 0.3s ease; }
 
