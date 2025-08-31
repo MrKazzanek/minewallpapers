@@ -381,7 +381,7 @@
 
         // Author specific data
         const authorData = {
-            profilePicture: 'https://i.ibb.co/Ld8fb2yj/bluzers.png', // Default profile picture
+            profilePicture: 'https://i.ibb.co/xZfQ5F7/fabsky.png', // Default profile picture
             authorName: 'FABSKY', // This name is not translated as it's a proper noun
             wallpapersCount: 7,
             description: {
@@ -390,7 +390,8 @@
             },
             // bannerImage has been removed as per request
             socialMedia: { // Optional. Set to an empty object {} to hide all social media buttons.
-                youtube: 'https://www.youtube.com/@Bluzers777/videos',
+                youtube: 'https://www.youtube.com/@fabsky6136',
+                tiktok: 'https://www.tiktok.com/@fabsky_yt',
             }
         };
 
@@ -400,8 +401,8 @@
             backButtonHref: 'https://minewallpapers.netlify.app/', // Link for the "Back" button. 'javascript:history.back()' goes to the previous page.
             licenseLinkPl: 'https://minewallpapers.netlify.app/license-pl', // License page URL for Polish
             licenseLinkEn: 'https://minewallpapers.netlify.app/license-en', // License page URL for English
-            defaultLanguage: 'en', // Initial language ('pl' or 'en')
-            profilePageBackground: 'https://i.ibb.co/YF5Yhtby/Minecraft-11-06-2025-16-22-55-Bluzers-minecraft.png', // URL for the blurred page background
+            defaultLanguage: 'pl', // Initial language ('pl' or 'en')
+            profilePageBackground: 'https://i.ibb.co/m5xZ08K3/Castle-by-FABSKY-1920x1080.png', // URL for the blurred page background
             profilePicRounded: false // true for rounded corners, false for circular profile picture
         };
 
@@ -494,11 +495,12 @@
                 facebook: 'fab fa-facebook-f',
                 github: 'fab fa-github',
                 twitch: 'fab fa-twitch',
-                website: 'fas fa-globe' // Generic website icon
+                website: 'fas fa-globe', // Generic website icon
+                tiktok: 'fab fa-tiktok',
             };
 
             // Define the preferred order of social media buttons
-            const socialMediaOrder = ['discord', 'youtube', 'instagram', 'twitter', 'facebook', 'github', 'twitch', 'website'];
+            const socialMediaOrder = ['discord', 'youtube', 'instagram', 'twitter', 'facebook', 'github', 'twitch', 'website','tiktok'];
 
             let hasSocialMedia = false;
             socialMediaOrder.forEach(platform => {
