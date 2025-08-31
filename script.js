@@ -102,7 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
         modalImg.src = wallpaperBase.image_full;
         modalImg.alt = getInterfaceTranslation('previewAlt', currentLanguage, { title: wallpaperText.title || `Wallpaper ${wallpaperId}` });
         modalTitle.textContent = wallpaperText.title || `Wallpaper ${wallpaperId}`;
-        modalAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${wallpaperBase.author || 'N/A'}`;
+        
+        // MODIFIED: Added author_link handling for modal
+        const modalAuthorContent = wallpaperBase.author_link ?
+            `<a href="${wallpaperBase.author_link}" target="_blank" rel="noopener noreferrer">${wallpaperBase.author || 'N/A'}</a>` :
+            (wallpaperBase.author || 'N/A');
+        modalAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${modalAuthorContent}`;
+
         const categoryKeys = wallpaperText.category_keys;
         if (categoryKeys && categoryKeys.length > 0) {
             const categoryNames = categoryKeys.map(key => getCategoryName(key, currentLanguage)).join(', ');
@@ -180,7 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const wallpaperText = getWallpaperTextData(wallpaperBase.id, currentLanguage);
 
         slideshowTitle.textContent = wallpaperText.title || `Wallpaper ${wallpaperBase.id}`;
-        slideshowAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${wallpaperBase.author || 'N/A'}`;
+        
+        // MODIFIED: Added author_link handling for slideshow pause
+        const slideshowAuthorContent = wallpaperBase.author_link ?
+            `<a href="${wallpaperBase.author_link}" target="_blank" rel="noopener noreferrer">${wallpaperBase.author || 'N/A'}</a>` :
+            (wallpaperBase.author || 'N/A');
+        slideshowAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${slideshowAuthorContent}`;
+
         const categoryKeys = wallpaperText.category_keys;
         if (categoryKeys && categoryKeys.length > 0) {
             slideshowCategories.innerHTML = `<strong>${getInterfaceTranslation('categoriesLabel', currentLanguage)}:</strong> ${categoryKeys.map(key => getCategoryName(key, currentLanguage)).join(', ')}`;
@@ -256,6 +268,12 @@ document.addEventListener('DOMContentLoaded', () => {
                  const tags = textData.category_keys.map(key => `<a href="#" class="category-tag" data-category-key="${key}">${getCategoryName(key, currentLanguage)}</a>`).join('');
                 categoryTagsHTML = `<div class="category-tags-container">${tags}</div>`;
             }
+
+            // MODIFIED: Added author_link handling for general wallpaper display
+            const authorContent = wallpaper.author_link ?
+                `<a href="${wallpaper.author_link}" target="_blank" rel="noopener noreferrer" class="author-link">${wallpaper.author || 'N/A'}</a>` :
+                (wallpaper.author || 'N/A');
+
             wallpaperItem.innerHTML = `
                 <div class="wallpaper-image-container" data-wallpaper-id="${wallpaper.id}">
                     ${wallpaper.is_new ? `<span class="new-tag">${getInterfaceTranslation('newTag', currentLanguage)}</span>` : ''}
@@ -263,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="wallpaper-info">
                     <h3>${textData.title || `Wallpaper ${wallpaper.id}`}</h3>
-                    <p class="author"><strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${wallpaper.author || 'N/A'}</p>
+                    <p class="author"><strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${authorContent}</p>
                     ${textData.description ? `<p class="description">${textData.description}</p>` : ''}
                     ${categoryTagsHTML}
                     <a href="${wallpaper.download_page_url || '#'}" target="_blank" rel="noopener noreferrer" class="download-btn">${getInterfaceTranslation('downloadButton', currentLanguage)}</a>
