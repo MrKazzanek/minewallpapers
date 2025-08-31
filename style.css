@@ -187,7 +187,7 @@ header { display: flex; justify-content: space-between; align-items: center; pad
 header .logo img { height: 40px; flex-shrink: 0; pointer-events: auto !important; transition: filter 0.3s ease; }
 
 body:not(.dark-theme) header .logo img {
-    filter: invert(1);
+/*     filter: invert(1); */
 }
 
 .search-container { flex-grow: 1; max-width: 550px; min-width: 180px; }
