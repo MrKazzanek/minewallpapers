@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://cdn.glitch.global/5576a764-16f0-41b3-9c61-c808edb4ba47/minecraft_title.png?v=1723223615332" type="image/x-icon">
     <title data-translate-template="pageTitleTemplate">Profil Autora - MineWallpapers</title>
-    <!-- Font Awesome for social media icons and back button icon -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Inline CSS provided by the user and custom styles -->
+ 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
         @font-face {
@@ -22,68 +22,68 @@
         }
 
         :root {
-            /* Core Palette & Layout - Twitter Dark Theme */
-            --bg-color: #15202B; /* Main background */
-            --text-color: #D6D9DB; /* Primary text */
-            --header-bg: #192734; /* Header background */
-            --header-border: #253341; /* Subtle border */
-            --card-bg: #192734; /* Profile card background */
-            --card-border: #253341; /* Card border */
-            --footer-bg: #192734; /* Footer background */
-            --footer-text: #8899A6; /* Lighter grey for footer text */
-            --link-color: #1DA1F2; /* Twitter blue */
+            
+            --bg-color: #15202B; 
+            --text-color: #D6D9DB; 
+            --header-bg: #192734; 
+            --header-border: #253341; 
+            --card-bg: #192734; 
+            --card-border: #253341; 
+            --footer-bg: #192734; 
+            --footer-text: #8899A6; 
+            --link-color: #1DA1F2; 
 
-            /* Interactive Elements */
-            --button-bg: #1DA1F2; /* Main action button, Twitter blue */
+           
+            --button-bg: #1DA1F2; 
             --button-text: #FFFFFF;
-            --button-hover-bg: #1A8CD8; /* Slightly darker Twitter blue */
-            --secondary-button-bg: #253341; /* e.g., language toggle, back button, license button */
+            --button-hover-bg: #1A8CD8; 
+            --secondary-button-bg: #253341; 
             --secondary-button-hover-bg: #293D4E;
             --icon-button-color: #D6D9DB;
             --icon-button-hover-bg: #253341;
 
-            /* Search & Inputs (mostly hidden but for consistency) */
+           
             --search-bg: #253341;
             --search-border: #38444D;
             --search-focus-border: #1DA1F2;
             --search-focus-shadow: rgba(29, 161, 242, 0.25);
 
-            /* Shadows & Depth */
+            
             --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
             --card-hover-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
             --header-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 
-            /* Radii */
+           
             --global-radius: 0.5rem;
             --radius-sm: 0.25rem;
             --radius-lg: 0.75rem;
 
-            /* Banner (profile page uses its own background, not this) */
+           
             --banner-overlay-color: rgba(0, 0, 0, 0.6);
-            --blur-amount: 6px; /* Still useful for profile background */
-            --banner-subtext-bg: rgba(29, 161, 242, 0.85); /* Use Twitter blue for consistency */
+            --blur-amount: 6px; 
+            --banner-subtext-bg: rgba(29, 161, 242, 0.85);
 
-            /* Tags (not used on profile page, but keep for completeness) */
-            --new-tag-bg: #E0245E; /* Twitter's dark pink/red */
+           
+            --new-tag-bg: #E0245E; 
             --new-tag-text: #ffffff;
             --tag-bg: #253341;
             --tag-text: #D6D9DB;
             --tag-text-color-on-dark: #ffffff;
-            --tag-text-color-on-light: #D6D9DB; /* Changed to match dark theme text */
+            --tag-text-color-on-light: #D6D9DB; 
 
-            /* Modal */
+           
             --modal-bg: rgba(0, 0, 0, 0.8);
             --modal-inner-bg: var(--card-bg);
-            --card-bg-rgb: 25, 51, 65; /* RGB equivalent of --card-bg for rgba usage */
-            --card-border-rgb: 37, 51, 65; /* RGB equivalent of --card-border for rgba usage */
+            --card-bg-rgb: 25, 51, 65; 
+            --card-border-rgb: 37, 51, 65; 
 
-            /* Font */
+           
             --main-font: 'Roboto', sans-serif;
             --font-size-base: 1rem;
             --line-height-base: 1.65;
         }
 
-        /* General Body and Main Layout */
+        
         *, *::before, *::after { box-sizing: border-box; }
         html, body { scroll-behavior: smooth; }
         body {
@@ -108,7 +108,7 @@
         a { color: var(--link-color); text-decoration: none; transition: color 0.2s ease; }
         a:hover { text-decoration: underline; color: var(--button-hover-bg); }
 
-        /* Buttons and Inputs - General Styling */
+        
         button, select, input { font-family: inherit; font-size: 0.95rem; padding: 0.65rem 0.9rem; border: 1px solid var(--search-border); border-radius: var(--global-radius); background-color: var(--search-bg); color: var(--text-color); transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease; }
         button:not(.icon-button):not(.social-button):not(.back-button) {
             cursor: pointer;
@@ -125,13 +125,13 @@
             overflow: hidden; line-height: 1;
         }
         .icon-button:active { transform: scale(0.95); }
-        .icon-button:hover { background-color: var(--icon-button-hover-bg); } /* Default hover for other icon buttons */
+        .icon-button:hover { background-color: var(--icon-button-hover-bg); } 
         button:focus-visible, select:focus-visible, input:focus-visible, .icon-button:focus-visible, .back-button:focus-visible {
             outline: 2px solid var(--search-focus-border); outline-offset: 2px; box-shadow: 0 0 0 0.2rem var(--search-focus-shadow);
         }
         button:focus, select:focus, input:focus, .icon-button:focus, .back-button:focus { outline: none; }
 
-        /* Header Specific Styles */
+     
         header {
             display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.75rem; background-color: var(--header-bg);
             border-bottom: 1px solid var(--header-border); position: sticky; top: 0; z-index: 1030;
@@ -361,7 +361,7 @@
                 'pageTitleTemplate': 'MineWallpapers - Profil Autora', // Template for document.title
                 'pageTitle': 'Najlepsze tapety z uniwersum Minecraft!',
                 'backButton': 'Wróć',
-                'wallpapersSent': 'Ilość wysłanych tapet',
+                'wallpapersSent': ' wysłanych tapet',
                 'licenseButton': 'Licencja',
                 'copyright': '© 2025 MineWallpapers. Wszelkie prawa zastrzeżone.',
                 'authorDescriptionDefault': 'Ten autor nie dodał jeszcze opisu.',
