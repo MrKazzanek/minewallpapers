@@ -4,7 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Licencja - MineWallpapers</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --primary: #1da1f2; /* Twitter Blue */
+      --primary-dark: #1a91da;
+      --primary-light: #e8f5fd;
+
+      --bg: #f5f8fa;
+      --text: #14171a;
+      --card-bg: #ffffff;
+      --footer-bg: #15202b;
+      --footer-text: #e1e8ed;
+
+      --radius-lg: 16px;
+      --card-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--primary);
+      padding: 1rem 2rem;
+    }
+
+    header .logo img {
+      height: 40px;
+    }
+
+    header button {
+      background: var(--card-bg);
+      color: var(--primary);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    header button:hover {
+      background: var(--primary-light);
+    }
+
+    .banner {
+      position: relative;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+
+    .banner-overlay {
+      position: absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.2);
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .license-box {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--card-shadow);
+    }
+
+    .license-box h2 {
+      color: var(--primary);
+      margin-top: 1.5rem;
+    }
+
+    .license-box p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .license-box button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .license-box button:hover {
+      background: var(--primary-dark);
+    }
+
+    footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    /* ukrywanie sekcji */
+    .lang { display: none; }
+    .lang.active { display: block; }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -15,46 +133,84 @@
       </a>
     </div>
     <div class="controls-right">
-      <a href="license-en.html">
-        <button>Zmień na English</button>
-      </a>
+      <button onclick="switchLang('pl')">Polski</button>
+      <button onclick="switchLang('en')">English</button>
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
+  <!-- BANNER -->
+  <section class="banner">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <h1>Licencja / License</h1>
+      <p>MineWallpapers</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
   <main>
-    <section class="banner">
-      <div class="banner-overlay"></div>
-      <div class="banner-content">
-        <h1>Licencja użytkowania</h1>
-        <p id="banner-subtext">MineWallpapers</p>
+    <!-- POLISH -->
+    <section class="license-box lang active" id="pl">
+      <h2>1. Postanowienia ogólne</h2>
+      <p>Niniejsza licencja określa zasady korzystania z tapet („Treści”) udostępnianych w serwisie MineWallpapers („Serwis”). Serwis nie jest powiązany ani sponsorowany przez Mojang Studios ani Microsoft Corporation. Korzystając z Serwisu, użytkownik akceptuje niniejsze warunki.</p>
+
+      <h2>2. Zakres licencji</h2>
+      <p>Tapety mogą być używane w projektach, na pulpitach, edytowane, udostępniane oraz rozpowszechniane komercyjnie, o ile nie stanowią samodzielnego przedmiotu sprzedaży.</p>
+
+      <h2>3. Ograniczenia</h2>
+      <p>Zakazuje się odsprzedaży tapet jako samodzielnego produktu. Wszelkie treści pochodzą od administracji lub społeczności, a nikt nie może czerpać z nich bezpośrednich korzyści finansowych.</p>
+
+      <h2>4. Prawa autorskie</h2>
+      <p>Jeżeli ktoś uzna, że jego prawa autorskie zostały naruszone, może skontaktować się z właścicielami serwisu w celu usunięcia danej tapety.</p>
+
+      <h2>5. Odpowiedzialność</h2>
+      <p>Serwis nie ponosi odpowiedzialności za sposób wykorzystania tapet przez użytkowników. Użytkownik korzysta z treści na własną odpowiedzialność.</p>
+
+      <h2>6. Postanowienia końcowe</h2>
+      <p>MineWallpapers zastrzega sobie prawo do zmiany licencji w dowolnym czasie. Obowiązuje prawo właściwe dla siedziby właściciela serwisu.</p>
+
+      <div style="margin-top:2rem; text-align:center;">
+        <a href="index.html"><button>Powrót</button></a>
       </div>
     </section>
 
-    <section style="max-width: 900px; margin: 2rem auto; padding: 2rem; background: var(--card-bg); border-radius: var(--radius-lg); box-shadow: var(--card-shadow);">
-      <h2>Warunki korzystania</h2>
-      <p>
-        Niniejsza licencja reguluje zasady korzystania z serwisu <b>MineWallpapers</b>. 
-        Wszystkie treści dostępne w serwisie są chronione prawami autorskimi. 
-      </p>
-      <p>
-        Użytkownik może korzystać z tapet wyłącznie w celach osobistych i niekomercyjnych. 
-        Kopiowanie, rozpowszechnianie lub wykorzystywanie w celach komercyjnych bez zgody autorów jest zabronione. 
-      </p>
-      <p>
-        Korzystanie z serwisu oznacza akceptację niniejszych warunków.
-      </p>
+    <!-- ENGLISH -->
+    <section class="license-box lang" id="en">
+      <h2>1. General Provisions</h2>
+      <p>This license governs the use of wallpapers ("Content") provided on the MineWallpapers service ("Service"). The Service is not affiliated with or sponsored by Mojang Studios or Microsoft Corporation. By using the Service, you agree to these terms.</p>
 
-      <div style="margin-top:2rem; display:flex; gap:1rem; justify-content:center;">
-        <a href="index.html"><button>Powrót</button></a>
+      <h2>2. Scope of License</h2>
+      <p>Wallpapers may be used in projects, as desktop backgrounds, edited, shared, and distributed commercially, provided they are not sold as standalone products.</p>
+
+      <h2>3. Restrictions</h2>
+      <p>Reselling wallpapers as standalone products is prohibited. All content comes from the administration or the community, and no one may derive direct financial gain from them.</p>
+
+      <h2>4. Copyright</h2>
+      <p>If someone believes their copyright has been infringed, they may contact the Service owners to request removal of the wallpaper.</p>
+
+      <h2>5. Liability</h2>
+      <p>The Service is not responsible for how users utilize wallpapers. Users access content at their own risk.</p>
+
+      <h2>6. Final Provisions</h2>
+      <p>MineWallpapers reserves the right to change this license at any time. The governing law is that of the Service owner's jurisdiction.</p>
+
+      <div style="margin-top:2rem; text-align:center;">
+        <a href="index.html"><button>Back</button></a>
       </div>
     </section>
   </main>
 
   <!-- FOOTER -->
   <footer>
-    2025 MineWallpapers. Wszelkie prawa zastrzeżone.
+    2025 MineWallpapers. All rights reserved.
   </footer>
+
+  <!-- SCRIPT -->
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+      document.getElementById(lang).classList.add('active');
+    }
+  </script>
 </body>
 </html>
-
