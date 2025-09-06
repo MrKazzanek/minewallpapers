@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const titlePlInput = document.getElementById('title-pl');
     const titleEnInput = document.getElementById('title-en');
     const authorInput = document.getElementById('author');
-    const authorLinkInput = document.getElementById('author-link'); // NOWE: Referencja do linku autora
+    const authorLinkInput = document.getElementById('author-link');
     const imageUrlInput = document.getElementById('image-url');
     const downloadUrlInput = document.getElementById('download-page-url');
     const descPlInput = document.getElementById('description-pl');
@@ -67,13 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const titlePl = titlePlInput.value.trim();
             const titleEn = titleEnInput.value.trim();
             const author = authorInput.value.trim();
-            const authorLink = authorLinkInput.value.trim(); // NOWE: Pobierz link autora
+            const authorLink = authorLinkInput.value.trim();
             const imageUrl = imageUrlInput.value.trim();
             const downloadUrl = downloadUrlInput.value.trim();
             const descPl = descPlInput.value.trim();
             const descEn = descEnInput.value.trim();
             // Pobierz wybrane kategorie (teraz może być wiele)
             const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
+
+            // === DEBUGGING: Wypisz wybrane kategorie do konsoli ===
+            console.log('Selected categories:', selectedCategories);
+            // ===================================================
+
             const isNew = isNewCheckbox ? isNewCheckbox.checked : true;
 
             // Walidacja
@@ -114,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (titlePlInput) titlePlInput.value = '';
             if (titleEnInput) titleEnInput.value = '';
             if (authorInput) authorInput.value = '';
-            if (authorLinkInput) authorLinkInput.value = ''; // NOWE: Wyczyść link autora
+            if (authorLinkInput) authorLinkInput.value = '';
             if (imageUrlInput) imageUrlInput.value = '';
             if (downloadUrlInput) downloadUrlInput.value = '';
             if (descPlInput) descPlInput.value = '';
@@ -122,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Wyczyść wybrane kategorie
             if (categorySelect) {
                 Array.from(categorySelect.options).forEach(option => option.selected = false);
-                categorySelect.options[0].selected = true; // Opcjonalnie: ustaw domyślną pustą opcję jako wybraną
+                categorySelect.options[0].selected = true; // Ustaw domyślną pustą opcję jako wybraną
             }
             if (isNewCheckbox) isNewCheckbox.checked = true;
             if (outputArea) outputArea.style.display = 'none';
@@ -134,36 +139,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Prosta Walidacja URL ---
      function isValidUrl(string) {
-        if (!string) return false; // Pusta stringa jest niepoprawnym URL
+        if (!string) return false;
         try {
             const url = new URL(string);
             return url.protocol === 'http:' || url.protocol === 'https:';
         } catch (_) {
-            // W przypadku błędu parsowania URL, sprawdzamy czy to względna ścieżka do obrazu
-            // Akceptuj ścieżki które wydają się URL-ami względnymi (bardzo proste heurystyki)
             if (string.includes('/') && string.includes('.') && !/\s/.test(string)) {
                  if (string.startsWith('images/')) return true;
-                 if (!string.includes('/')) return true; // Może być tylko nazwa_pliku.png
+                 if (!string.includes('/')) return true;
             }
-            // Akceptuj URL z ibb.co i mediafire.com nawet jeśli new URL ma problem z jakimś formatowaniem (mniej restrykcyjne)
             if (string.includes('ibb.co') || string.includes('mediafire.com')) return true;
             return false;
         }
       }
 
-
     // --- Generowanie kodu ---
     function escapeJsString(str) {
         if (typeof str !== 'string') return '';
-        // Użyj JSON.stringify do bezpiecznego escapowania stringów, a następnie usuń zewnętrzne cudzysłowy.
-        // Należy jednak uważać na wstawianie tego w szablon stringa, lepiej po prostu escapować cudzysłowy i ukośniki.
         return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
     }
 
     // Dodano parametr authorLink i zmieniono categoryKey na selectedCategories (tablica)
     function generateCodeSnippets(id, titlePl, titleEn, author, authorLink, imageUrl, downloadUrl, descPl, descEn, selectedCategories, isNew) {
         const safeAuthor = escapeJsString(author);
-        const safeAuthorLink = escapeJsString(authorLink); // NOWE: Zabezpiecz link autora
+        const safeAuthorLink = escapeJsString(authorLink);
         const safeTitlePl = escapeJsString(titlePl);
         const safeTitleEn = escapeJsString(titleEn);
         const safeDescPl = escapeJsString(descPl);
@@ -174,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Automatyczne tworzenie nazwy miniaturki
         let thumbnailUrl = safeImageUrl;
         const lastDotIndex = safeImageUrl.lastIndexOf('.');
-        const lastSlashIndex = safeImageUrl.lastIndexOf('/'); // Upewnij się, że rozszerzenie jest za ostatnim slashem
+        const lastSlashIndex = safeImageUrl.lastIndexOf('/');
         if (lastDotIndex > 0 && lastDotIndex > lastSlashIndex) {
             const nameWithoutExt = safeImageUrl.substring(0, lastDotIndex);
             const ext = safeImageUrl.substring(lastDotIndex);
@@ -184,13 +183,12 @@ document.addEventListener('DOMContentLoaded', () => {
              thumbnailUrl = safeImageUrl;
         }
 
-
         // 1. Kod dla data.js (zmodyfikowany o author_link i is_new)
         let dataCode = `{
     id: ${id},
     author: "${safeAuthor}",`;
 
-        if (safeAuthorLink) { // Dodaj author_link tylko jeśli jest podany
+        if (safeAuthorLink) {
             dataCode += `
     author_link: "${safeAuthorLink}",`;
         }
