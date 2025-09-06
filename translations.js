@@ -154,6 +154,7 @@ const wallpaperContentTranslations = {
         65: { title: "Mglista Góra", description: "Góra w mgle a za nią słońce.", category_keys: ["landscapes"] },
         66: { title: "Zamglona góra podczas wschodu", description: "Zamglona góra a za nią wschód słońca.", category_keys: ["landscapes"] },
         67: { title: "Wesoły Ghast", description: "Wesoły Ghast nad lasem. Użyto Actions & Stuff.", category_keys: ["mods"] },
+        68: { title: "Zaginione Miasto", description: "Zaginione Miasto z moda Lost Cities.", category_keys: ["landscapes", "mods"] },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_keys: ["landscapes", "vanilla"] },
@@ -223,5 +224,6 @@ const wallpaperContentTranslations = {
         65: { title: "Misty Mountain", description: "A mountain in the fog and the sun behind it.", category_keys: ["landscapes"] },
         66: { title: "Misty Mountain Sunrise", description: "A misty mountain and the sunrise behind it.", category_keys: ["landscapes"] },
         67: { title: "Happy Ghast", description: "A Happy Ghast over the forest. Using Actions & Stuff.", category_keys: ["mods"] },
+        68: { title: "The Lost City", description: "Lost City from Lost Cities mod.", category_keys: ["landscapes", "mods"] },
     }
 };
