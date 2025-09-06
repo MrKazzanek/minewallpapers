@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // MODIFIED: Added author_link handling for slideshow pause
         const slideshowAuthorContent = wallpaperBase.author_link ?
-            `<a href="${wallpaperBase.author_link}" target="_blank" rel="noopener noreferrer">${wallpaperBase.author || 'N/A'}</a>` :
+            `<a href="${wallpaperBase.author_link}" target="_self" rel="noopener noreferrer">${wallpaperBase.author || 'N/A'}</a>` :
             (wallpaperBase.author || 'N/A');
         slideshowAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${slideshowAuthorContent}`;
 
@@ -271,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // MODIFIED: Added author_link handling for general wallpaper display
             const authorContent = wallpaper.author_link ?
-                `<a href="${wallpaper.author_link}" target="_blank" rel="noopener noreferrer" class="author-link">${wallpaper.author || 'N/A'}</a>` :
+                `<a href="${wallpaper.author_link}" target="_self" rel="noopener noreferrer" class="author-link">${wallpaper.author || 'N/A'}</a>` :
                 (wallpaper.author || 'N/A');
 
             wallpaperItem.innerHTML = `
