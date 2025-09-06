@@ -5,12 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const titlePlInput = document.getElementById('title-pl');
     const titleEnInput = document.getElementById('title-en');
     const authorInput = document.getElementById('author');
+    const authorLinkInput = document.getElementById('author-link'); // NOWE: Referencja do linku autora
     const imageUrlInput = document.getElementById('image-url');
     const downloadUrlInput = document.getElementById('download-page-url');
     const descPlInput = document.getElementById('description-pl');
     const descEnInput = document.getElementById('description-en');
     const categorySelect = document.getElementById('category-key');
-    const isNewCheckbox = document.getElementById('is-new-wallpaper'); // NOWE
+    const isNewCheckbox = document.getElementById('is-new-wallpaper');
     const clearBtn = document.getElementById('clear-btn');
     const outputArea = document.getElementById('output-area');
     const codeDataOutput = document.getElementById('code-data');
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Element select kategorii nie został znaleziony!");
             return;
         }
+        // Usuń wszystkie opcje poza pierwszą (disabled selected)
         while (categorySelect.options.length > 1) {
             categorySelect.remove(1);
         }
@@ -65,16 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const titlePl = titlePlInput.value.trim();
             const titleEn = titleEnInput.value.trim();
             const author = authorInput.value.trim();
+            const authorLink = authorLinkInput.value.trim(); // NOWE: Pobierz link autora
             const imageUrl = imageUrlInput.value.trim();
             const downloadUrl = downloadUrlInput.value.trim();
             const descPl = descPlInput.value.trim();
             const descEn = descEnInput.value.trim();
-            const categoryKey = categorySelect.value;
-            const isNew = isNewCheckbox ? isNewCheckbox.checked : true; // Odczytaj stan checkboxa (domyślnie true jeśli nie istnieje)
+            // Pobierz wybrane kategorie (teraz może być wiele)
+            const selectedCategories = Array.from(categorySelect.selectedOptions).map(option => option.value);
+            const isNew = isNewCheckbox ? isNewCheckbox.checked : true;
 
             // Walidacja
-            if (!id || !titlePl || !titleEn || !author || !imageUrl || !downloadUrl || !categoryKey) {
-                alert('Proszę wypełnić wszystkie wymagane pola (ID, Nazwy, Autor, URL Obrazu, URL Pobierania, Kategoria).');
+            if (!id || !titlePl || !titleEn || !author || !imageUrl || !downloadUrl || selectedCategories.length === 0) {
+                alert('Proszę wypełnić wszystkie wymagane pola (ID, Nazwy, Autor, URL Obrazu, URL Pobierania, Kategoria/Kategorie).');
                 return;
             }
             const parsedId = parseInt(id, 10);
@@ -86,9 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
                  alert('Proszę podać poprawne adresy URL dla obrazu i strony pobierania (np. https://... lub images/...).');
                  return;
             }
+            // Walidacja URL Autora (jeśli podano)
+            if (authorLink && !isValidUrl(authorLink)) {
+                alert('Proszę podać poprawny adres URL dla linku autora (np. https://...).');
+                return;
+            }
 
-            // Generuj kod (przekazujemy isNew)
-            generateCodeSnippets(id, titlePl, titleEn, author, imageUrl, downloadUrl, descPl, descEn, categoryKey, isNew);
+            // Generuj kod (przekazujemy authorLink i selectedCategories)
+            generateCodeSnippets(id, titlePl, titleEn, author, authorLink, imageUrl, downloadUrl, descPl, descEn, selectedCategories, isNew);
 
             saveNextId(id);
             idInput.value = parsedId + 1;
@@ -105,12 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (titlePlInput) titlePlInput.value = '';
             if (titleEnInput) titleEnInput.value = '';
             if (authorInput) authorInput.value = '';
+            if (authorLinkInput) authorLinkInput.value = ''; // NOWE: Wyczyść link autora
             if (imageUrlInput) imageUrlInput.value = '';
             if (downloadUrlInput) downloadUrlInput.value = '';
             if (descPlInput) descPlInput.value = '';
             if (descEnInput) descEnInput.value = '';
-            if (categorySelect) categorySelect.value = '';
-            if (isNewCheckbox) isNewCheckbox.checked = true; // NOWE: Resetuj checkbox do stanu checked
+            // Wyczyść wybrane kategorie
+            if (categorySelect) {
+                Array.from(categorySelect.options).forEach(option => option.selected = false);
+                categorySelect.options[0].selected = true; // Opcjonalnie: ustaw domyślną pustą opcję jako wybraną
+            }
+            if (isNewCheckbox) isNewCheckbox.checked = true;
             if (outputArea) outputArea.style.display = 'none';
             if (codeDataOutput) codeDataOutput.textContent = '';
             if (codeTransPlOutput) codeTransPlOutput.textContent = '';
@@ -120,37 +134,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
      // --- Prosta Walidacja URL ---
      function isValidUrl(string) {
-        if (!string) return false;
-        if (string.startsWith('http://') || string.startsWith('https://')) {
-             try { new URL(string); return true; } catch (_) { return false; }
+        if (!string) return false; // Pusta stringa jest niepoprawnym URL
+        try {
+            const url = new URL(string);
+            return url.protocol === 'http:' || url.protocol === 'https:';
+        } catch (_) {
+            // W przypadku błędu parsowania URL, sprawdzamy czy to względna ścieżka do obrazu
+            // Akceptuj ścieżki które wydają się URL-ami względnymi (bardzo proste heurystyki)
+            if (string.includes('/') && string.includes('.') && !/\s/.test(string)) {
+                 if (string.startsWith('images/')) return true;
+                 if (!string.includes('/')) return true; // Może być tylko nazwa_pliku.png
+            }
+            // Akceptuj URL z ibb.co i mediafire.com nawet jeśli new URL ma problem z jakimś formatowaniem (mniej restrykcyjne)
+            if (string.includes('ibb.co') || string.includes('mediafire.com')) return true;
+            return false;
         }
-        // Akceptuj ścieżki które wydają się URL-ami względnymi (bardzo proste)
-        if (string.includes('/') && string.includes('.') && !/\s/.test(string) && !string.startsWith('/') && !string.startsWith('.')) {
-             // Proste heurystyczne sprawdzenie dla względnych URL obrazów np. 'images/img.png'
-             // Można to ulepszyć sprawdzając rozszerzenia itp.
-             // UWAGA: To nie jest pełna walidacja URL względnego.
-             // Jeśli zaczyna się od 'images/' jest OK
-             if(string.startsWith('images/')) return true;
-             // Akceptuje też jeśli jest tylko nazwa pliku z rozszerzeniem
-             if (!string.includes('/')) return true;
-        }
-        // Akceptuj URL z ibb.co
-        if (string.includes('ibb.co')) return true;
-        // Akceptuj URL z mediafire.com
-        if (string.includes('mediafire.com')) return true;
-
-        return false;
       }
+
 
     // --- Generowanie kodu ---
     function escapeJsString(str) {
         if (typeof str !== 'string') return '';
+        // Użyj JSON.stringify do bezpiecznego escapowania stringów, a następnie usuń zewnętrzne cudzysłowy.
+        // Należy jednak uważać na wstawianie tego w szablon stringa, lepiej po prostu escapować cudzysłowy i ukośniki.
         return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '\\r');
     }
 
-    // Dodano parametr isNew
-    function generateCodeSnippets(id, titlePl, titleEn, author, imageUrl, downloadUrl, descPl, descEn, categoryKey, isNew) {
+    // Dodano parametr authorLink i zmieniono categoryKey na selectedCategories (tablica)
+    function generateCodeSnippets(id, titlePl, titleEn, author, authorLink, imageUrl, downloadUrl, descPl, descEn, selectedCategories, isNew) {
         const safeAuthor = escapeJsString(author);
+        const safeAuthorLink = escapeJsString(authorLink); // NOWE: Zabezpiecz link autora
         const safeTitlePl = escapeJsString(titlePl);
         const safeTitleEn = escapeJsString(titleEn);
         const safeDescPl = escapeJsString(descPl);
@@ -161,48 +174,52 @@ document.addEventListener('DOMContentLoaded', () => {
         // Automatyczne tworzenie nazwy miniaturki
         let thumbnailUrl = safeImageUrl;
         const lastDotIndex = safeImageUrl.lastIndexOf('.');
-        if (lastDotIndex > 0) {
+        const lastSlashIndex = safeImageUrl.lastIndexOf('/'); // Upewnij się, że rozszerzenie jest za ostatnim slashem
+        if (lastDotIndex > 0 && lastDotIndex > lastSlashIndex) {
             const nameWithoutExt = safeImageUrl.substring(0, lastDotIndex);
             const ext = safeImageUrl.substring(lastDotIndex);
-             // Proste zastąpienie '.png' -> '_thumb.png' itp. działa dla URL z ibb np.
-             thumbnailUrl = nameWithoutExt + '_thumb' + ext;
-
-            // Jeśli URL nie zawiera nazwy pliku (np. tylko domena), loguj ostrzeżenie
-             if (thumbnailUrl === safeImageUrl || !safeImageUrl.includes('/')) {
-                 console.warn("Nie udało się automatycznie wygenerować URL miniaturki, użyto pełnego URL obrazu. Edytuj ręcznie w 'data.js', jeśli potrzebujesz innej miniaturki (np. dodaj '_thumb' przed rozszerzeniem).");
-                 thumbnailUrl = safeImageUrl; // Wróć do oryginalnego URL jeśli coś poszło nie tak
-            }
+            thumbnailUrl = nameWithoutExt + '_thumb' + ext;
         } else {
-             console.warn("Nie udało się znaleźć rozszerzenia w URL obrazu. Nie można wygenerować URL miniaturki. Użyto pełnego URL.");
+             console.warn("Nie udało się znaleźć rozszerzenia w URL obrazu lub URL jest nieprawidłowy. Nie można wygenerować URL miniaturki. Użyto pełnego URL. Proszę ręcznie sprawdzić 'image_thumb'.");
+             thumbnailUrl = safeImageUrl;
         }
 
 
-        // 1. Kod dla data.js (zmodyfikowany)
+        // 1. Kod dla data.js (zmodyfikowany o author_link i is_new)
         let dataCode = `{
     id: ${id},
-    author: "${safeAuthor}",
+    author: "${safeAuthor}",`;
+
+        if (safeAuthorLink) { // Dodaj author_link tylko jeśli jest podany
+            dataCode += `
+    author_link: "${safeAuthorLink}",`;
+        }
+
+        dataCode += `
     image_thumb: "${thumbnailUrl}", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "${safeImageUrl}",
-    download_page_url: "${safeDownloadUrl}"`; // Usuwamy przecinek z tej linii
+    download_page_url: "${safeDownloadUrl}"`;
 
-        // Dodaj is_new: true jeśli checkbox jest zaznaczony
         if (isNew) {
             dataCode += `,
     is_new: true`;
         }
 
         dataCode += `
-  },`; // Zamykający nawias i przecinek na końcu CAŁEGO obiektu
+  },`;
 
-        // 2. Kod dla translations.js (PL)
+        // Utwórz sformatowaną listę kategorii dla translations.js
+        const categoriesArrayString = selectedCategories.map(cat => `"${escapeJsString(cat)}"`).join(', ');
+
+        // 2. Kod dla translations.js (PL) (zmieniono category_key na category_keys jako tablicę)
         let transPlCode = `    ${id}: { title: "${safeTitlePl}",`;
         if (safeDescPl) { transPlCode += ` description: "${safeDescPl}",`; }
-        transPlCode += ` category_key: "${categoryKey}" },`;
+        transPlCode += ` category_keys: [${categoriesArrayString}] },`;
 
-        // 3. Kod dla translations.js (EN)
+        // 3. Kod dla translations.js (EN) (zmieniono category_key na category_keys jako tablicę)
         let transEnCode = `    ${id}: { title: "${safeTitleEn}",`;
         if (safeDescEn) { transEnCode += ` description: "${safeDescEn}",`; }
-        transEnCode += ` category_key: "${categoryKey}" },`;
+        transEnCode += ` category_keys: [${categoriesArrayString}] },`;
 
         if (codeDataOutput) codeDataOutput.textContent = dataCode;
         if (codeTransPlOutput) codeTransPlOutput.textContent = transPlCode;
@@ -229,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Nie udało się skopiować do schowka. Spróbuj ręcznie.');
                 });
             } else if (codeElement) {
-                // Fallback
+                // Fallback dla starszych przeglądarek
                 try {
                     const range = document.createRange();
                     range.selectNode(codeElement);
