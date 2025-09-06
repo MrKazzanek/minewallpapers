@@ -7,7 +7,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/YF5Yhtby/Minecraft-11-06-2025-16-22-55-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/YF5Yhtby/Minecraft-11-06-2025-16-22-55-Bluzers-minecraft.png",
     download_page_url: "https://www.mediafire.com/file/s3hlxwylgvpxl64/MineWallpapers-Misty-Mountain-Sunrise-by-Bluzers.zip/file",
-    is_new: true
+    
   },
    {
     id: 65,
@@ -16,7 +16,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/qMZrbT2m/Minecraft-11-06-2025-16-23-15-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/qMZrbT2m/Minecraft-11-06-2025-16-23-15-Bluzers-minecraft.png",
     download_page_url: "https://www.mediafire.com/file/afyurcmb0d1vq4p/MineWallpapers-Misty-Mountain-by-Bluzers.zip/file",
-    is_new: true
+    
   },
    {
     id: 64,
