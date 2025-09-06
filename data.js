@@ -1,6 +1,15 @@
 
 const wallpapersData = [
    {
+    id: 67,
+    author: "Bluzers",
+    author_link: "https://minewallpapers.netlify.app/bluzers/",
+    image_thumb: "https://i.ibb.co/Y4Z06k9d/Minecraft-04-07-2025-21-24-43-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/Y4Z06k9d/Minecraft-04-07-2025-21-24-43-Bluzers-minecraft.png",
+    download_page_url: "https://www.mediafire.com/file/wuap4cp9y92an43/MineWallpapers-Happy-Ghast-by-Bluzers.zip/file",
+    is_new: true
+  },
+   {
     id: 66,
     author: "Bluzers",
     author_link: "https://minewallpapers.netlify.app/bluzers/",
