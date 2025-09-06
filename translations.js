@@ -31,6 +31,7 @@ const interfaceTranslations = {
         scrollToTopLabel: "Przewiń do góry",
         newTag: "Nowa",
         setupComplete: "Ustawienia zapisane!",
+        licenseButton: "Licencja",
     },
     en: {
         searchPlaceholder: "Search wallpapers...",
@@ -62,6 +63,7 @@ const interfaceTranslations = {
         scrollToTopLabel: "Scroll to top",
         newTag: "New",
         setupComplete: "Settings saved!",
+        licenseButton: "License",
     }
 };
 
