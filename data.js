@@ -1,6 +1,15 @@
 
 const wallpapersData = [
    {
+    id: 68,
+    author: "Bluzers",
+    author_link: "https://minewallpapers.netlify.app/bluzers/",
+    image_thumb: "https://i.ibb.co/1J28Bs86/2025-07-21-15-23-03-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/1J28Bs86/2025-07-21-15-23-03-Bluzers-minecraft.png",
+    download_page_url: "https://www.mediafire.com/file/ct68cdoqfe6bpji/MineWallpapers-The-Lost-City-by-Bluzers.zip/file",
+    is_new: true
+  },
+   {
     id: 67,
     author: "Bluzers",
     author_link: "https://minewallpapers.netlify.app/bluzers/",
