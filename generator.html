@@ -34,6 +34,14 @@
                 <input type="text" id="author" name="author" required>
             </div>
 
+            <!-- NOWE: Pole URL Autora -->
+            <div class="form-group">
+                <label for="author-link">URL Autora (Opcjonalne):</label>
+                <input type="url" id="author-link" name="author-link" placeholder="np. https://minewallpapers.netlify.app/bluzers/">
+                <small>Opcjonalny link do profilu lub strony autora.</small>
+            </div>
+            <!-- Koniec NOWEGO pola -->
+
             <div class="form-group">
                 <label for="image-url">URL Obrazu (pełny rozmiar):</label>
                 <input type="url" id="image-url" name="image-url" required placeholder="np. https://i.ibb.co/nazwa/obraz.png">
@@ -56,11 +64,12 @@
             </div>
 
             <div class="form-group">
-                <label for="category-key">Kategoria:</label>
-                <select id="category-key" name="category-key" required>
-                    <option value="" disabled selected>-- Wybierz kategorię --</option>
+                <label for="category-key">Kategoria/Kategorie:</label>
+                <select id="category-key" name="category-key" required multiple size="5"> <!-- Dodano 'multiple' i 'size' -->
+                    <option value="" disabled>-- Wybierz kategorie --</option>
                     <!-- Opcje kategorii zostaną dodane przez JS -->
                 </select>
+                <small>Wybierz jedną lub więcej kategorii, przytrzymując Ctrl/Cmd.</small>
             </div>
 
              <!-- NOWE: Checkbox "Nowa tapeta" -->
