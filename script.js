@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollToTopBtn = document.getElementById('scroll-to-top');
     const loadingScreen = document.getElementById('loading-screen');
     const categoryCountDisplay = document.getElementById('category-count-display');
+    const licenseLink = document.getElementById('license-link'); // NOWY ELEMENT
 
     // --- Preview Modal Elements ---
     const modal = document.getElementById('image-preview-modal');
@@ -219,6 +220,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, SLIDESHOW_DELAY);
     }
     
+    // NOWA FUNKCJA: Aktualizuje link do licencji
+    function updateLicenseLinkHref(lang) {
+        if (licenseLink) {
+            licenseLink.href = lang === 'pl' ? 'license-pl.html' : 'license-en.html';
+        }
+    }
+
     // --- UI Update & Filter Functions ---
     function updateStaticTexts(lang) {
         document.documentElement.lang = lang;
@@ -396,6 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStaticTexts(currentLanguage);
         populateCategories(currentLanguage);
         filterAndSearchWallpapers();
+        updateLicenseLinkHref(currentLanguage); // WYWOŁANIE NOWEJ FUNKCJI PRZY INICJALIZACJI
         startBannerSlideshow();
         if (loadingScreen) {
              setTimeout(() => {
@@ -451,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStaticTexts(currentLanguage);
         populateCategories(currentLanguage);
         filterAndSearchWallpapers();
+        updateLicenseLinkHref(currentLanguage); // WYWOŁANIE NOWEJ FUNKCJI PRZY ZMIANIE JĘZYKA
     });
     
     closeModalBtn?.addEventListener('click', closePreviewModal);
