@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // MODIFIED: Added author_link handling for modal
         const modalAuthorContent = wallpaperBase.author_link ?
-            `<a href="${wallpaperBase.author_link}"  rel="noopener noreferrer">${wallpaperBase.author || 'N/A'}</a>` :
+            `<a href="${wallpaperBase.author_link}" target="_self" rel="noopener noreferrer">${wallpaperBase.author || 'N/A'}</a>` :
             (wallpaperBase.author || 'N/A');
         modalAuthor.innerHTML = `<strong>${getInterfaceTranslation('authorLabel', currentLanguage)}:</strong> ${modalAuthorContent}`;
 
