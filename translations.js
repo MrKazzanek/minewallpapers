@@ -155,6 +155,7 @@ const wallpaperContentTranslations = {
         66: { title: "Zamglona góra podczas wschodu", description: "Zamglona góra a za nią wschód słońca.", category_keys: ["landscapes"] },
         67: { title: "Wesoły Ghast", description: "Wesoły Ghast nad lasem. Użyto Actions & Stuff.", category_keys: ["mods"] },
         68: { title: "Zaginione Miasto", description: "Zaginione Miasto z moda Lost Cities.", category_keys: ["landscapes", "mods"] },
+        69: { title: "Średniowieczne Miasto", description: "Malownicza średniowieczna wioska. Użyto Bare Bones.", category_keys: ["builds"] },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_keys: ["landscapes", "vanilla"] },
@@ -225,5 +226,6 @@ const wallpaperContentTranslations = {
         66: { title: "Misty Mountain Sunrise", description: "A misty mountain and the sunrise behind it.", category_keys: ["landscapes"] },
         67: { title: "Happy Ghast", description: "A Happy Ghast over the forest. Using Actions & Stuff.", category_keys: ["mods"] },
         68: { title: "The Lost City", description: "Lost City from Lost Cities mod.", category_keys: ["landscapes", "mods"] },
+        69: { title: "Medieval City", description: "A picturesque medieval village. Bare Bones was used.", category_keys: ["builds"] },
     }
 };
