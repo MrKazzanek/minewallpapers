@@ -7,7 +7,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/1J28Bs86/2025-07-21-15-23-03-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/1J28Bs86/2025-07-21-15-23-03-Bluzers-minecraft.png",
     download_page_url: "https://www.mediafire.com/file/ct68cdoqfe6bpji/MineWallpapers-The-Lost-City-by-Bluzers.zip/file",
-    is_new: true
+    
   },
    {
     id: 67,
@@ -16,7 +16,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/Y4Z06k9d/Minecraft-04-07-2025-21-24-43-Bluzers-minecraft_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/Y4Z06k9d/Minecraft-04-07-2025-21-24-43-Bluzers-minecraft.png",
     download_page_url: "https://www.mediafire.com/file/wuap4cp9y92an43/MineWallpapers-Happy-Ghast-by-Bluzers.zip/file",
-    is_new: true
+    
   },
    {
     id: 66,
