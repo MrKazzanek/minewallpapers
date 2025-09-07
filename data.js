@@ -1,6 +1,15 @@
 
 const wallpapersData = [
    {
+    id: 70,
+    author: "FABSKY",
+    author_link: "https://minewallpapers.netlify.app/fabsky/",
+    image_thumb: "https://i.ibb.co/9Hq22gdT/2025-08-31-16-17-08-Fabian-Maher_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/9Hq22gdT/2025-08-31-16-17-08-Fabian-Maher.png",
+    download_page_url: "https://www.mediafire.com/file/xqb5pe7f35ndyrf/MineWallpapers-Ancient-world-by-FABSKY.zip/file",
+    is_new: true
+  },
+   {
     id: 69,
     author: "FABSKY",
     author_link: "https://minewallpapers.netlify.app/fabsky/",
