@@ -1,6 +1,15 @@
 
 const wallpapersData = [
    {
+    id: 69,
+    author: "FABSKY",
+    author_link: "https://minewallpapers.netlify.app/fabsky/",
+    image_thumb: "https://i.ibb.co/spqZdn0Q/2025-08-31-16-16-18-Fabian-Maher_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/spqZdn0Q/2025-08-31-16-16-18-Fabian-Maher.png",
+    download_page_url: "https://www.mediafire.com/file/n4czkyu84mla6rq/MineWallpapers-Medieval-City-by-FABSKY.zip/file",
+    is_new: true
+  },
+   {
     id: 68,
     author: "Bluzers",
     author_link: "https://minewallpapers.netlify.app/bluzers/",
