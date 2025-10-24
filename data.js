@@ -1,6 +1,15 @@
 
 const wallpapersData = [
    {
+    id: 71,
+    author: "FABSKY",
+    author_link: "https://minewallpapers.netlify.app/fabsky/",
+    image_thumb: "https://i.ibb.co/MXfTjPy/fab_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/MXfTjPy/fab.jpg",
+    download_page_url: "https://www.mediafire.com/file/08905drpewahyt1/MineWallpapers-High-Peaks-by-FABSKY.zip/file",
+    is_new: true
+  },
+   {
     id: 70,
     author: "FABSKY",
     author_link: "https://minewallpapers.netlify.app/fabsky/",
