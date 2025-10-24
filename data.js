@@ -7,7 +7,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/9Hq22gdT/2025-08-31-16-17-08-Fabian-Maher_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/9Hq22gdT/2025-08-31-16-17-08-Fabian-Maher.png",
     download_page_url: "https://www.mediafire.com/file/xqb5pe7f35ndyrf/MineWallpapers-Ancient-world-by-FABSKY.zip/file",
-    is_new: true
+   
   },
    {
     id: 69,
@@ -16,7 +16,7 @@ const wallpapersData = [
     image_thumb: "https://i.ibb.co/spqZdn0Q/2025-08-31-16-16-18-Fabian-Maher_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/spqZdn0Q/2025-08-31-16-16-18-Fabian-Maher.png",
     download_page_url: "https://www.mediafire.com/file/n4czkyu84mla6rq/MineWallpapers-Medieval-City-by-FABSKY.zip/file",
-    is_new: true
+    
   },
    {
     id: 68,
