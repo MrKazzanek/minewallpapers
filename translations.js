@@ -157,6 +157,7 @@ const wallpaperContentTranslations = {
         68: { title: "Zaginione Miasto", description: "Zaginione Miasto z moda Lost Cities.", category_keys: ["landscapes", "mods"] },
         69: { title: "Średniowieczne Miasto", description: "Malownicza średniowieczna wioska. Użyto Bare Bones.", category_keys: ["builds"] },
         70: { title: "Pradawny świat", description: "Świat pradawnych lat. Użyto Bare Bones.", category_keys: ["landscapes"] },
+        71: { title: "Wysokie Szczyty", description: "Malownicze pasmo górskie.", category_keys: ["landscapes"] },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_keys: ["landscapes", "vanilla"] },
@@ -229,5 +230,6 @@ const wallpaperContentTranslations = {
         68: { title: "The Lost City", description: "Lost City from Lost Cities mod.", category_keys: ["landscapes", "mods"] },
         69: { title: "Medieval City", description: "A picturesque medieval village. Bare Bones was used.", category_keys: ["builds"] },
         70: { title: "Ancient world", description: "The world of ancient times. Bare Bones was used.", category_keys: ["landscapes"] },
+        71: { title: "High Peaks", description: "Picturesque mountain range.", category_keys: ["landscapes"] },
     }
 };
