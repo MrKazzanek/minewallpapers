@@ -1,0 +1,20 @@
+{
+  "name": "MineWallpapers",
+  "short_name": "MineWallpapers",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d6efd",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/b0p4rHf/minewallpapers.png",
+      "sizes": "2243x2243",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.ibb.co/b0p4rHf/minewallpapers.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
