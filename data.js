@@ -1,13 +1,22 @@
 
 const wallpapersData = [
    {
+    id: 72,
+    author: "MineWallpapers",
+    author_link: "https://minewallpapers.netlify.app/minewallpapers/",
+    image_thumb: "https://i.ibb.co/Pv1bw9n3/Copper-Age_thumb.png", // Sprawdź, czy ta ścieżka jest poprawna!
+    image_full: "https://i.ibb.co/Pv1bw9n3/Copper-Age.png",
+    download_page_url: "https://www.mediafire.com/file/mrbge681twb8n5p/MineWallpapers-Copper-Age-by-MineWallpapers.zip/file",
+    is_new: true
+  },
+   {
     id: 71,
     author: "FABSKY",
     author_link: "https://minewallpapers.netlify.app/fabsky/",
     image_thumb: "https://i.ibb.co/MXfTjPy/fab_thumb.jpg", // Sprawdź, czy ta ścieżka jest poprawna!
     image_full: "https://i.ibb.co/MXfTjPy/fab.jpg",
     download_page_url: "https://www.mediafire.com/file/08905drpewahyt1/MineWallpapers-High-Peaks-by-FABSKY.zip/file",
-    is_new: true
+    
   },
    {
     id: 70,
