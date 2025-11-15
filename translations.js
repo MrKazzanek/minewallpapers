@@ -158,6 +158,7 @@ const wallpaperContentTranslations = {
         69: { title: "Średniowieczne Miasto", description: "Malownicza średniowieczna wioska. Użyto Bare Bones.", category_keys: ["builds"] },
         70: { title: "Pradawny świat", description: "Świat pradawnych lat. Użyto Bare Bones.", category_keys: ["landscapes"] },
         71: { title: "Wysokie Szczyty", description: "Malownicze pasmo górskie.", category_keys: ["landscapes"] },
+        72: { title: "Epoka miedzi", description: "Miedziana ściana jako tapeta idealna na premierę dropu 1.21.9, wzbogacona o shadery Visual Vibrance.", category_keys: ["updates", "other"] },
     },
     en: {
         1: { title: "High Mountains (Vanilla)", description: "Snowy mountains and sunset.", category_keys: ["landscapes", "vanilla"] },
@@ -231,5 +232,6 @@ const wallpaperContentTranslations = {
         69: { title: "Medieval City", description: "A picturesque medieval village. Bare Bones was used.", category_keys: ["builds"] },
         70: { title: "Ancient world", description: "The world of ancient times. Bare Bones was used.", category_keys: ["landscapes"] },
         71: { title: "High Peaks", description: "Picturesque mountain range.", category_keys: ["landscapes"] },
+        72: { title: "Copper Age", description: "A copper wall as a wallpaper, perfect for the 1.21.9 drop release, enhanced with Visual Vibrance shaders.", category_keys: ["updates", "other"] },
     }
 };
