@@ -13,11 +13,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#353635">
+    <meta name="theme-color" content="#353635">
 </head>
 
 <body oncontextmenu="return false;">
 
+<!-- EKRAN ŁADOWANIA -->
 <div id="loading-screen">
     <img src="https://github.com/MrKazzanek/minewallpapers/blob/main/tytu%C5%82.png?raw=true" alt="MineWallpapers Logo Loading">
     <div class="loading-bar-container">
@@ -26,23 +27,15 @@
     <p>Ładowanie / Loading...</p>
 </div>
 
-
-<div id="loading-screen">
-    <img src="https://github.com/MrKazzanek/minewallpapers/blob/main/tytu%C5%82.png?raw=true" alt="MineWallpapers Logo Loading">
-    <div class="loading-bar-container">
-        <div class="loading-bar"></div>
-    </div>
-    <p>Ładowanie / Loading...</p>
-</div>
-
-<!-- WKLEJ TUTAJ -->
-<div style="background-color: #cf2222; color: #ffffff; text-align: center; padding: 12px; font-weight: bold; font-family: 'Roboto', sans-serif; width: 100%; font-size: 1.1rem; box-sizing: border-box;">
+<!-- ========================================== -->
+<!-- NOWY PASEK OGŁOSZENIA (DODANO TUTAJ)       -->
+<!-- ========================================== -->
+<div style="background-color: #cf2222; color: #ffffff; text-align: center; padding: 12px; font-weight: bold; font-family: 'Roboto', sans-serif; width: 100%; font-size: 1.1rem; box-sizing: border-box; position: relative; z-index: 1020;">
     MineWallpapers kończy swoją działalność? / MineWallpapers is shutting down?
 </div>
-
+<!-- ========================================== -->
 
 <header>
-
     <div class="logo" id="logo-link" style="cursor: pointer;">
         <img src="https://github.com/MrKazzanek/minewallpapers/blob/main/tytu%C5%82.png?raw=true" alt="MineWallpapers Logo">
     </div>
@@ -50,16 +43,12 @@
         <input type="search" id="search-input" style="font-family: MinecraftPl; font-size: 30px; font-weight: normal;" placeholder="Szukaj tapet...">
     </div>
     <div class="controls-right">
-
         <button id="theme-toggle-btn" class="icon-button" aria-label="Zmień motyw">
             <i class="fas fa-circle-half-stroke"></i>
         </button>
-
         <button class="menu-toggle" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-
     </div>
 </header>
-
 
 <section class="banner" id="banner-slideshow"
          data-banner-images='[
@@ -105,6 +94,7 @@
     <p>© <span id="current-year"></span> QozaWorks. <a id="license-link" href="#" data-translate="licenseButton" class="footer-link"></a> <span data-translate="footerRights">All rights reserved.</span></p>
 </footer>
 
+<!-- MODALE -->
 <div id="image-preview-modal" class="modal" style="display: none;">
     <span class="close-btn" title="Zamknij podgląd" data-translate-title="closePreview">×</span>
     <div class="modal-inner-content">
@@ -155,12 +145,11 @@
 <script src="data.js"></script>
 <script src="translations.js"></script>
 <script src="script.js"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js")
-    .then(() => console.log("Service Worker zarejestrowany!"));
-}
-
-    </script>
+<script>
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js")
+            .then(() => console.log("Service Worker zarejestrowany!"));
+    }
+</script>
 </body>
 </html>
